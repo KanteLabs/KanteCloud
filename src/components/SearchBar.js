@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { client_id } from './config'
+import 'whatwg-fetch';
 import ReactDOM from 'react-dom';
 
-let search = "http://api.soundcloud.com/tracks?linked_partitioning=1&client_id="+ client_id +"&limit=50&offset=0&q=chance";
+var query = [];
+let search = "http://api.soundcloud.com/tracks?linked_partitioning=1&client_id="+ client_id +"&limit=50&offset=0&q="+query;
 let tags = "http://api.soundcloud.com/tracks?linked_partitioning=1&client_id="+ client_id +"&limit=50&offset=0&tags=deep%20house";
-let query = [];
 
 
 
@@ -25,8 +26,11 @@ class Search extends Component{
 
 	handleSearchSubmit(){
 		query = this.state.value;
-		event.preventDefault();
-		console.log(query);
+		fetch(search + query,).then(function(response){
+			console.log(response)
+		}, function(error){
+			console.log("Failed to get data")
+		})
 	}
 		
 
