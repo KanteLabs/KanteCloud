@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { client_id } from './config'
 import 'whatwg-fetch';
+import SC from 'soundcloud';
 import ReactDOM from 'react-dom';
 
-var query = [];
-let search = "http://api.soundcloud.com/tracks?linked_partitioning=1&client_id="+ client_id +"&limit=50&offset=0&q="+query;
-let tags = "http://api.soundcloud.com/tracks?linked_partitioning=1&client_id="+ client_id +"&limit=50&offset=0&tags=deep%20house";
+var query = ["kanye"];
+let search = "https://api.soundcloud.com/tracks?linked_partitioning=1&client_id="+ client_id +"&limit=50&offset=0&q="+query;
+let tags = "https://api.soundcloud.com/tracks?linked_partitioning=1&client_id="+ client_id +"&limit=50&offset=0&tags=deep%20house";
 
 
 
@@ -26,11 +27,27 @@ class Search extends Component{
 
 	handleSearchSubmit(){
 		query = this.state.value;
-		fetch(search + query,).then(function(response){
-			console.log(response)
+		SC.initialize({
+  		client_id: client_id
+		});
+
+		//SC.get('/users/6969243/tracks').then(function(tracks){
+  		//console.log('Latest track: ' + tracks[0].title);
+  		//console.log(tracks);
+		//});
+
+		SC.get('/tracks' + query).then(function(tracks){
+  		console.log('Latest track: ' + tracks[0].title);
+  		console.log(tracks);
+		});
+
+		/*fetch(search + query,{
+			method:"GET"
+		}).then(function(response){
+			console.log(response.json)
 		}, function(error){
 			console.log("Failed to get data")
-		})
+		})*/
 	}
 		
 
@@ -39,7 +56,7 @@ class Search extends Component{
 			<form>
 			<input type="text" value={this.state.value} placeholder="Enter a Artist, Song, or Album.." onChange={this.handleChange}/>
 			<input value="Update" onClick={this.handleSearchSubmit} />
-			<p id="SearchTest" className="SearchTest">You searched for {this.state.value}</p>
+			<p id="SearchTest" className="SearchTest">Live texting update: {this.state.value}</p>
 			</form>
 		)
 	};

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import Login from './components/login';
-import Search from './components/SearchBar';
+import NavContainer from './components/NavContainer';
+import SC from 'soundcloud';
 import './App.css';
 
 class App extends Component {
@@ -13,8 +13,7 @@ class App extends Component {
           <h2>KanteCloud</h2>
         </div>
         <div className="App-intro">
-        <Login />
-        <Search />
+        <NavContainer />
         </div>
       </div>
     );

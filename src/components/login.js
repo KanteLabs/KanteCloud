@@ -5,7 +5,8 @@ import SC from 'soundcloud';
 function handleLoginClick() {
 	SC.initialize({
   	client_id: client_id,
-  	redirect_uri: 'https://kantelabs.github.io/KanteCloud/callback.html'
+  	redirect_uri: 'https://kantelabs.github.io/KanteCloud/callback.html',
+  	oauth_token: ""
 	});
 
 	// initiate auth popup
