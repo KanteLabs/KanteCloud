@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { client_id } from './config'
+import { client_id } from './config';
+import 'isomorphic-fetch';
 import 'whatwg-fetch';
 import SC from 'soundcloud';
 import ReactDOM from 'react-dom';
 
-var query = ["kanye"];
-let search = "https://api.soundcloud.com/tracks?linked_partitioning=1&client_id="+ client_id +"&limit=50&offset=0&q="+query;
+let query = [""];
+let trackTitle = [];
+let search = "https://api.soundcloud.com/tracks?&client_id="+ client_id +"&limit=50&offset=0&q="+query;
 let tags = "https://api.soundcloud.com/tracks?linked_partitioning=1&client_id="+ client_id +"&limit=50&offset=0&tags=deep%20house";
-
-
 
 class Search extends Component{
 	
@@ -27,38 +27,43 @@ class Search extends Component{
 
 	handleSearchSubmit(){
 		query = this.state.value;
+
 		SC.initialize({
   		client_id: client_id
 		});
 
-		//SC.get('/users/6969243/tracks').then(function(tracks){
-  		//console.log('Latest track: ' + tracks[0].title);
-  		//console.log(tracks);
-		//});
-
-		SC.get('/tracks' + query).then(function(tracks){
-  		console.log('Latest track: ' + tracks[0].title);
-  		console.log(tracks);
-		});
-
-		/*fetch(search + query,{
+		fetch(search + query,{
 			method:"GET"
 		}).then(function(response){
-			console.log(response.json)
+			return response.json();
 		}, function(error){
 			console.log("Failed to get data")
-		})*/
-	}
-		
+		}).then(function(json) {
+    		console.log('parsed json', json)
+    		for (let i = 0; i <json.length; i++) {
+    			trackTitle.push(json[i].title);
+    		}
+    		console.log(trackTitle)
+    		const trackItems = trackTitle.map((titles) =>
+    			<li>{titles}</li>
+    		);
+ 		 }).catch(function(ex) {
+    		console.log('parsing failed', ex)
+  		});
+	};
 
 	render(){
 		return(
 			<form>
 			<input type="text" value={this.state.value} placeholder="Enter a Artist, Song, or Album.." onChange={this.handleChange}/>
 			<input value="Update" onClick={this.handleSearchSubmit} />
-			<p id="SearchTest" className="SearchTest">Live texting update: {this.state.value}</p>
+			<div id="trackViewer">
+				 <p>Results for: {this.state.value}</p>
+				 <ul>{this.trackItems}</ul>
+			</div>
 			</form>
 		)
 	};
 };
+
 export default Search;

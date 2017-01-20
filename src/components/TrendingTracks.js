@@ -41,7 +41,6 @@ class TrendingTracks extends Component{
 		<div className="trackViewer">
 			<button onClick={this.handleTrendingClick}>Trending Tracks</button>
 			<ul id="trackList"  onChange={this.handleChange} >
-				<li>{this.state.value}</li>
 			</ul>
 		</div>
 		)
