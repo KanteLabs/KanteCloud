@@ -27,6 +27,7 @@ class Search extends Component{
 
 	handleSearchSubmit(){
 		query = this.state.value;
+		event.preventDefault();
 
 		SC.initialize({
   		client_id: client_id
@@ -56,7 +57,7 @@ class Search extends Component{
 		return(
 			<form>
 			<input type="text" value={this.state.value} placeholder="Enter a Artist, Song, or Album.." onChange={this.handleChange}/>
-			<input value="Update" onClick={this.handleSearchSubmit} />
+			<button type="button" onClick={this.handleSearchSubmit}>Search</button>
 			<div id="trackViewer">
 				 <p>Results for: {this.state.value}</p>
 				 <ul>{this.trackItems}</ul>
