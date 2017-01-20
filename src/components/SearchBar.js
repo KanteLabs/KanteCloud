@@ -45,9 +45,6 @@ class Search extends Component{
     			trackTitle.push(json[i].title);
     		}
     		console.log(trackTitle)
-    		const trackItems = trackTitle.map((titles) =>
-    			<li>{titles}</li>
-    		);
  		 }).catch(function(ex) {
     		console.log('parsing failed', ex)
   		});
@@ -60,7 +57,7 @@ class Search extends Component{
 			<button type="button" onClick={this.handleSearchSubmit}>Search</button>
 			<div id="trackViewer">
 				 <p>Results for: {this.state.value}</p>
-				 <ul>{this.trackItems}</ul>
+				 <ul>{trackTitle.map((titles) =><li>{titles}</li>)}</ul>
 			</div>
 			</form>
 		)
