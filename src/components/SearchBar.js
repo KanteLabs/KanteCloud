@@ -57,7 +57,7 @@ class Search extends Component{
 			<button type="button" onClick={this.handleSearchSubmit}>Search</button>
 			<div id="trackViewer">
 				 <p>Results for: {this.state.value}</p>
-				 <ul>{trackTitle.map((titles) =><li>{titles}</li>)}</ul>
+				 <ul>{trackTitle.map((titles) =><li key={titles.toString()}>{titles}</li>)}</ul>
 			</div>
 			</form>
 		)
