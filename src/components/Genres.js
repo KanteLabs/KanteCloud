@@ -1,22 +1,33 @@
 import React, { Component } from 'react';
-import { client_id } from './config';
+import { client_id, genreTag } from './config';
 import 'isomorphic-fetch';
 import 'whatwg-fetch';
 import SC from 'soundcloud';
 
 class Genres extends Component {
+	handleGenreClick = (pop) => {
+        event.preventDefault();
 
-//let tags = "https://api.soundcloud.com/tracks?linked_partitioning=1&client_id="+ client_id +"&limit=50&offset=0&tags=deep%20house";
+		fetch(genreTag + event.value, { method:"GET" })
+    	.then(response => response.json())
+    	.catch(error => console.log(error))
+    	.then(json => {
+        	console.log(json);
+    	}).catch(error => console.log(error))
+    };
 
 	render(){
 		return(
 		<div className="genreList">
-			<button>Pop</button>
-			<button>Hip-Hop</button>
+			<button onClick={ event =>this.handleGenreClick(event)}>Pop</button>
+			<button onClick={ event =>this.handleGenreClick(event)}>Hip-Hop</button>
 			<button>Reggae</button>
 			<button>R&B</button>
 			<button>EDM</button>
 			<button>Dubstep</button>
+			<div id="trackViewer">
+                 <ul></ul>
+            </div>
 		</div>
 		)
 	}

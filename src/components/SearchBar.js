@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { client_id } from './config';
+import {client_id, search, newTracks} from './config';
+import Genres from './Genres'
 import 'isomorphic-fetch';
 import 'whatwg-fetch';
 import SC from 'soundcloud';
@@ -44,7 +45,7 @@ class Search extends Component{
 
         // Using arrow functions for readability
         if(this.state.value !== ""){        	
-    		fetch("https://api.soundcloud.com/tracks?&client_id="+ client_id +"&limit=50&offset=0&q=" + this.state.value, { method:"GET" })
+    		fetch(search + this.state.value, { method:"GET" })
         	.then(response => response.json())
         	.catch(error => console.log(error))
         	.then(json => {
@@ -65,7 +66,7 @@ class Search extends Component{
 
         SC.initialize({ client_id });
 
-		fetch("https://api.soundcloud.com/tracks?format=json&client_id=" + client_id, { method:"GET" })
+		fetch(newTracks, { method:"GET" })
     	.then(response => response.json())
     	.catch(error => console.log(error))
     	.then(json => {
