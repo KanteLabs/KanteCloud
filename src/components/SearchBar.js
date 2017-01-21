@@ -3,65 +3,75 @@ import { client_id } from './config';
 import 'isomorphic-fetch';
 import 'whatwg-fetch';
 import SC from 'soundcloud';
-import ReactDOM from 'react-dom';
-
-let query = [""];
-let trackTitle = [];
-let search = "https://api.soundcloud.com/tracks?&client_id="+ client_id +"&limit=50&offset=0&q="+query;
-let tags = "https://api.soundcloud.com/tracks?linked_partitioning=1&client_id="+ client_id +"&limit=50&offset=0&tags=deep%20house";
 
 class Search extends Component{
-	
-	constructor(props){
-		super(props);
-		this.state = {value: ''};
 
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
-	};
+    constructor(props){
+        super(props);
+        
+        //trackTitle will hold the names of the songs, and metadata as well
+        this.state = {
+        	value: '',
+            trackTitle: []
+        };
 
-	handleChange(event){
-		this.setState({value: event.target.value});
-		event.preventDefault();
-	}
+        //Handles pressing the enter key
+        this.handleOnKeyPress = this.handleOnKeyPress.bind(this);
+    };
 
-	handleSearchSubmit(){
-		query = this.state.value;
-		event.preventDefault();
+    handleChange(event){
+        event.preventDefault();
+        this.setState({ value: event.target.value });
+    }
 
-		SC.initialize({
-  		client_id: client_id
-		});
+    //This Function handles when a user presses the 'Enter' key
+    //If this.state.value has a value then the function will call handleSearchSubmit, else it will do nothing
+    handleOnKeyPress = (event) => {
+    	if(event.charCode === 13){    		
+    		this.state.value !== "" ? event.preventDefault(this.handleSearchSubmit()) : event.preventDefault();
+    		event.preventDefault();  
+    	}
+    }
 
-		fetch(search + query,{
-			method:"GET"
-		}).then(function(response){
-			return response.json();
-		}, function(error){
-			console.log("Failed to get data")
-		}).then(function(json) {
-    		console.log('parsed json', json)
-    		for (let i = 0; i <json.length; i++) {
-    			trackTitle.push(json[i].title);
-    		}
-    		console.log(trackTitle)
- 		 }).catch(function(ex) {
-    		console.log('parsing failed', ex)
-  		});
-	};
+    handleSearchSubmit(){
+        event.preventDefault();
 
-	render(){
-		return(
-			<form>
-			<input type="text" value={this.state.value} placeholder="Enter a Artist, Song, or Album.." onChange={this.handleChange}/>
-			<button type="button" onClick={this.handleSearchSubmit}>Search</button>
-			<div id="trackViewer">
-				 <p>Results for: {this.state.value}</p>
-				 <ul>{trackTitle.map((titles) =><li key={titles.toString()}>{titles}</li>)}</ul>
-			</div>
-			</form>
-		)
-	};
+        // Create local scope buffer for trackTitles to store in state in the end
+        let trackTitleBuffer = []
+
+        // Shortened expression; instead of client_id: client_id
+        SC.initialize({ client_id });
+
+        // Using arrow functions for readability
+        if(this.state.value !== ""){        	
+    		fetch("https://api.soundcloud.com/tracks?&client_id="+ client_id +"&limit=50&offset=0&q=" + this.state.value, { method:"GET" })
+        	.then(response => response.json())
+        	.catch(error => console.log(error))
+        	.then(json => {
+		        //I had assistance on coding this part. Basically instead rendering each track one by one, the function waits for 
+		        //all the tracks to be loaded and then it triggers a render in the trackViewer
+            	json.map(entity => trackTitleBuffer.push(entity.title))
+            	this.setState({ trackTitle: trackTitleBuffer })
+        	})
+        	.catch(error => console.log(error))
+        }event.preventDefault();
+    };
+
+    render(){
+        // Desctructuring the state
+        const { trackTitle, value } = this.state
+
+        return(
+            <form>
+            <input type="text" value={this.state.value} placeholder="Enter a Artist, Song, or Album.." onChange={event => this.handleChange(event)} onKeyPress={this.handleOnKeyPress} />
+            <button type="button" onClick={() => this.handleSearchSubmit()}>Search</button>
+            <div id="trackViewer">
+                 <p>Result for: {value}</p>
+                 <ul>{ trackTitle.map(title => <li key={title}>{title}</li>) }</ul>
+            </div>
+            </form>
+        )
+    };
 };
 
 export default Search;

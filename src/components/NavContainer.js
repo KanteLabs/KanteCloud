@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import TrendingTracks from './TrendingTracks';
+import NewTracks from './NewTracks';
 import SearchBar from './SearchBar';
 import Login from './login';
+import Genres from './Genres';
 
 class NavContainer extends Component {
 	render(){
 		return(
 		<div>
 			<Login />
-			<TrendingTracks />
+			<NewTracks />
+			<Genres />
 			<SearchBar />
 		</div>
 		)

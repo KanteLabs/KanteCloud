@@ -15,14 +15,6 @@ function handleLoginClick() {
 	}).then(function(me) {
   	prompt('Hello, ' + me.username);
 	});
-
-	SC.connect().then(function(){
-  	return SC.put('/me/followings/183');
-	}).then(function(user){
-  	alert('You are now following ' + user.username);
-	}).catch(function(error){
-	  alert('Error: ' + error.message);
-	});
 }
 
 class Login extends Component {

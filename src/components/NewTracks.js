@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { client_id } from './config'
 import SC from 'soundcloud';
-import ReactDOM from 'react-dom';
 
 let trackTitles = [];
-let tracks2 = [];
-class TrendingTracks extends Component{
+
+class NewTracks extends Component{
+
+
 		constructor(props){
 		super(props);
 		this.state = {value: []};
@@ -20,7 +21,6 @@ class TrendingTracks extends Component{
 	}
 
 	handleTrendingClick(){
-		tracks2 = this.state.value;
 		SC.initialize({
   		client_id: client_id
 		});
@@ -31,7 +31,6 @@ class TrendingTracks extends Component{
   			trackTitles.push(tracks[i].title);
   		}
   		console.log(trackTitles);
-  		this.state.value = trackTitles;
 		});
 	}
 		
@@ -46,4 +45,4 @@ class TrendingTracks extends Component{
 		)
 	};
 };
-export default TrendingTracks;
+export default NewTracks;
