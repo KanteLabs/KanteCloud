@@ -57,6 +57,23 @@ class Search extends Component{
         }event.preventDefault();
     };
 
+    //This function is similar to the handleSearchSubmit function with some minor changes
+   	handleNewClick(){
+        event.preventDefault();
+
+        let trackTitleBuffer = []
+
+        SC.initialize({ client_id });
+
+		fetch("https://api.soundcloud.com/tracks?format=json&client_id=" + client_id, { method:"GET" })
+    	.then(response => response.json())
+    	.catch(error => console.log(error))
+    	.then(json => {
+        	json.map(entity => trackTitleBuffer.push(entity.title))
+        	this.setState({ trackTitle: trackTitleBuffer })
+    	}).catch(error => console.log(error))
+    };
+
     render(){
         // Desctructuring the state
         const { trackTitle, value } = this.state
@@ -65,6 +82,7 @@ class Search extends Component{
             <form>
             <input type="text" value={this.state.value} placeholder="Enter a Artist, Song, or Album.." onChange={event => this.handleChange(event)} onKeyPress={this.handleOnKeyPress} />
             <button type="button" onClick={() => this.handleSearchSubmit()}>Search</button>
+            <button type="button" onClick={() => this.handleNewClick()}>Latest</button>
             <div id="trackViewer">
                  <p>Result for: {value}</p>
                  <ul>{ trackTitle.map(title => <li key={title}>{title}</li>) }</ul>

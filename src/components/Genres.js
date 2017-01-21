@@ -11,9 +11,12 @@ class Genres extends Component {
 	render(){
 		return(
 		<div className="genreList">
-			<ul>
-				<li>Hi</li>
-			</ul>
+			<button>Pop</button>
+			<button>Hip-Hop</button>
+			<button>Reggae</button>
+			<button>R&B</button>
+			<button>EDM</button>
+			<button>Dubstep</button>
 		</div>
 		)
 	}

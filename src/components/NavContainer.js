@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import NewTracks from './NewTracks';
 import SearchBar from './SearchBar';
 import Login from './login';
 import Genres from './Genres';
@@ -9,7 +8,6 @@ class NavContainer extends Component {
 		return(
 		<div>
 			<Login />
-			<NewTracks />
 			<Genres />
 			<SearchBar />
 		</div>
