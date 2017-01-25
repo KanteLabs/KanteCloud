@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import NavContainer from './components/NavContainer';
-import Genres from './components/Genres';
+import NavContainer from './containers/NavContainer';
 import './App.css';
 
 class App extends Component {

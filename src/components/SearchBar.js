@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {client_id, search, newTracks} from './config';
-import Genres from './Genres'
+import Genres from './Genres';
+import '../search.css';
 import 'isomorphic-fetch';
 import 'whatwg-fetch';
 import SC from 'soundcloud';
@@ -13,7 +14,12 @@ class Search extends Component{
         //trackTitle will hold the names of the songs, and metadata as well
         this.state = {
         	value: '',
-            trackTitle: []
+            trackTitle: [],
+            artwork_url: [],
+            genreList: [],
+            permalink_url: [],
+            stream_url: [],
+            streamList: []
         };
 
         //Handles pressing the enter key
@@ -34,6 +40,7 @@ class Search extends Component{
     	}
     }
 
+
     handleSearchSubmit(){
         event.preventDefault();
 
@@ -50,7 +57,7 @@ class Search extends Component{
         	.catch(error => console.log(error))
         	.then(json => {
 		        //I had assistance on coding this part. Basically instead rendering each track one by one, the function waits for 
-		        //all the tracks to be loaded and then it triggers a render in the trackViewer
+		        //all the tracks to be loaded and then it triggers a render in the trackViewertrackTitleBuffer
             	json.map(entity => trackTitleBuffer.push(entity.title))
             	this.setState({ trackTitle: trackTitleBuffer })
         	})
@@ -63,32 +70,40 @@ class Search extends Component{
         event.preventDefault();
 
         let trackTitleBuffer = []
+        let genreBuffer = []
+        let streamBuffer = []
 
         SC.initialize({ client_id });
 
 		fetch(newTracks, { method:"GET" })
     	.then(response => response.json())
     	.catch(error => console.log(error))
-    	.then(json => {
+    	.then(json => {	
         	json.map(entity => trackTitleBuffer.push(entity.title))
-        	this.setState({ trackTitle: trackTitleBuffer })
-    	}).catch(error => console.log(error))
+        	this.setState({ trackTitle: trackTitleBuffer }),
+        	json.map(entity => streamBuffer.push(entity.stream_url))
+        	this.setState({ streamList: streamBuffer })   	
+        })        
+    	.catch(error => console.log(error))
     };
 
+   
     render(){
         // Desctructuring the state
-        const { trackTitle, value } = this.state
+        const { trackTitle,streamList, value } = this.state
 
         return(
-            <form>
-            <input type="text" value={this.state.value} placeholder="Enter a Artist, Song, or Album.." onChange={event => this.handleChange(event)} onKeyPress={this.handleOnKeyPress} />
-            <button type="button" onClick={() => this.handleSearchSubmit()}>Search</button>
-            <button type="button" onClick={() => this.handleNewClick()}>Latest</button>
-            <div id="trackViewer">
-                 <p>Result for: {value}</p>
-                 <ul>{ trackTitle.map(title => <li key={title}>{title}</li>) }</ul>
+            <div className="searchApp">
+                <div className="navbar">
+                    <Genres />
+                    <input type="text" value={this.state.value} placeholder="Enter a Artist, Song, or Album.." onChange={event => this.handleChange(event)} onKeyPress={this.handleOnKeyPress} />
+                    <button type="button" onClick={() => this.handleSearchSubmit()}>Search</button><button type="button" onClick={() => this.handleNewClick()}>Latest</button>
+                </div>
+                <div id="trackViewer">
+                     <p>Result for: {value}</p>
+                     <ul>{ trackTitle.map(title => <li key={title}><a href={streamList[1]}>{title}</a></li>) }</ul>
+                </div>
             </div>
-            </form>
         )
     };
 };
