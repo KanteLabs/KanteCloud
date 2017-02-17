@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
-import {client_id, search, newTracks} from './config';
-import Genres from './Genres';
+import {search, newTracks, genreTag, genreName } from './config';
 import '../search.css';
 import 'isomorphic-fetch';
 import 'whatwg-fetch';
-import SC from 'soundcloud';
 
 class Search extends Component{
 
     constructor(props){
         super(props);
         
-        //trackTitle will hold the names of the songs, and metadata as well
+        //trackInfo will hold the names of the songs, and metadata as well
         this.state = {
         	value: '',
-            trackTitle: [],
-            artwork_url: [],
-            genreList: [],
-            permalink_url: [],
-            stream_url: [],
-            streamList: []
+            trackInfo: []
         };
 
         //Handles pressing the enter key
@@ -40,72 +33,92 @@ class Search extends Component{
     	}
     }
 
-
     handleSearchSubmit(){
         event.preventDefault();
-
-        // Create local scope buffer for trackTitles to store in state in the end
-        let trackTitleBuffer = []
-
-        // Shortened expression; instead of client_id: client_id
-        SC.initialize({ client_id });
 
         // Using arrow functions for readability
         if(this.state.value !== ""){        	
     		fetch(search + this.state.value, { method:"GET" })
         	.then(response => response.json())
         	.catch(error => console.log(error))
-        	.then(json => {
-		        //I had assistance on coding this part. Basically instead rendering each track one by one, the function waits for 
-		        //all the tracks to be loaded and then it triggers a render in the trackViewertrackTitleBuffer
-            	json.map(entity => trackTitleBuffer.push(entity.title))
-            	this.setState({ trackTitle: trackTitleBuffer })
+        	.then(trackInfo => {
+                this.setState({trackInfo: trackInfo})
         	})
         	.catch(error => console.log(error))
         }event.preventDefault();
     };
 
-    //This function is similar to the handleSearchSubmit function with some minor changes
+    //This function is similar to the handleSearchSubmit function with some minor changes for showing, only new tracks
    	handleNewClick(){
         event.preventDefault();
 
-        let trackTitleBuffer = []
-        let genreBuffer = []
-        let streamBuffer = []
-
-        SC.initialize({ client_id });
-
-		fetch(newTracks, { method:"GET" })
-    	.then(response => response.json())
-    	.catch(error => console.log(error))
-    	.then(json => {	
-        	json.map(entity => trackTitleBuffer.push(entity.title))
-        	this.setState({ trackTitle: trackTitleBuffer }),
-        	json.map(entity => streamBuffer.push(entity.stream_url))
-        	this.setState({ streamList: streamBuffer })   	
-        })        
+        fetch(newTracks, { method:"GET" })
+        .then(response => response.json())
+        .catch(error => console.log(error))
+        .then(trackInfo => {   
+            //json.map(entity => tracks.push(entity.title))
+            this.setState({ trackInfo: trackInfo })   
+        })
     	.catch(error => console.log(error))
     };
 
+    //This autoload trending and new tracks
+    componentDidMount(){
+        fetch(newTracks, { method:"GET" })
+        .then(response => response.json())
+        .catch(error => console.log(error))
+        .then(trackInfo => {   
+            //json.map(entity => tracks.push(entity.title))
+            this.setState({ trackInfo: trackInfo })   
+        })
+        .catch(error => console.log(error))
+    };
+
+    handleGenreClick = (event) => {
+        let name = (event.target.name);
+
+        event.preventDefault();
+
+        fetch(genreTag + name, { method:"GET" })
+        .then(response => response.json())
+        .catch(error => console.log(error))
+        .then(trackInfo => {   
+            //json.map(entity => tracks.push(entity.title))
+            this.setState({ trackInfo: trackInfo })   
+        })
+        .catch(error => console.log(error))
+    };
    
     render(){
         // Desctructuring the state
-        const { trackTitle,streamList, value } = this.state
+        const { value, trackInfo } = this.state
 
         return(
             <div className="searchApp">
-                <div className="navbar">
-                    <Genres />
+                <div className="navbar">                    
+                <div className="genreList">
+                    <button name={genreName[0]} onClick={ event =>this.handleGenreClick(event)}>Pop</button>
+                    <button name={genreName[1]} onClick={ event =>this.handleGenreClick(event)}>Hip-Hop</button>
+                    <button name={genreName[2]} onClick={ event =>this.handleGenreClick(event)}>Reggae</button>
+                    <button name={genreName[3]} onClick={ event =>this.handleGenreClick(event)}>R&B</button>
+                    <button name={genreName[4]} onClick={ event =>this.handleGenreClick(event)}>EDM</button>
+                    <button name={genreName[5]} onClick={ event =>this.handleGenreClick(event)}>Dubstep</button>
+                </div>
                     <input type="text" value={this.state.value} placeholder="Enter a Artist, Song, or Album.." onChange={event => this.handleChange(event)} onKeyPress={this.handleOnKeyPress} />
-                    <button type="button" onClick={() => this.handleSearchSubmit()}>Search</button><button type="button" onClick={() => this.handleNewClick()}>Latest</button>
+                    <button type="button" onClick={() => this.handleSearchSubmit()}>Search</button>
+                    <button type="button" onClick={() => this.handleNewClick()}>Latest</button>
                 </div>
                 <div id="trackViewer">
                      <p>Result for: {value}</p>
-                     <ul>{ trackTitle.map(title => <li key={title}><a href={streamList[1]}>{title}</a></li>) }</ul>
+                     <ul>{trackInfo.map(this.renderTrack)}</ul>
                 </div>
             </div>
         )
-    };
+    }
+    //This configures what should be loaded from a search query
+    renderTrack({id, user_id, title, artwork_url, permalink_url, stream_url, user}){
+        return <li key={id}>{title} and {user.username} and {user.avatar_url}</li>
+    }
 };
 
 export default Search;

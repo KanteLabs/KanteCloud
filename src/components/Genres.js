@@ -41,10 +41,6 @@ class Genres extends Component {
 			<button name={genreName[3]} onClick={ event =>this.handleGenreClick(event)}>R&B</button>
 			<button name={genreName[4]} onClick={ event =>this.handleGenreClick(event)}>EDM</button>
 			<button name={genreName[5]} onClick={ event =>this.handleGenreClick(event)}>Dubstep</button>
-			<div id="trackViewer">
-                 <p>Result for: {value}</p>
-                <ul>{ trackTitle.map(title => <li key={title}>{title}</li>) }</ul>
-            </div>
 		</div>
 		)
 	}

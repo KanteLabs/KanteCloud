@@ -1,0 +1,19 @@
+.navbar {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.genreList {
+}
+
+ul{	
+	list-style-type: none;
+}
+ul li a {
+	text-decoration: none;
+}
+
+button {
+    padding: 1em;
+}
