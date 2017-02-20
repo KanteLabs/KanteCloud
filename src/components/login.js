@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
 import { client_id } from './config';
 import SC from 'soundcloud';
 
-function handleLoginClick() {
+export const handleLoginClick = function() {
 	SC.initialize({
   	client_id: client_id,
   	redirect_uri: 'https://kantelabs.github.io/KanteCloud/callback.html',
@@ -16,16 +15,3 @@ function handleLoginClick() {
   	prompt('Hello, ' + me.username);
 	});
 }
-
-class Login extends Component {
-
-	render(){		
-		return (
-
-			<button onClick={handleLoginClick}>Login</button>
-		);
-	}
-
-}
-
-export default Login;

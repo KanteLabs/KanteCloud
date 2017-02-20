@@ -1,3 +1,5 @@
+
+
 export const client_id = "0PKz7xjH5uemKDK8GdHQyO0mU9kZ0fJ2";
 export const client_secret = "pTE5IADHjTRMwCnKsv7NQFdsPqDd7qJc";
 export const search = "https://api.soundcloud.com/tracks?&client_id="+ client_id +"&limit=100&offset=0&q=";
