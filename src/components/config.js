@@ -1,5 +1,5 @@
 
-
+import SC from 'soundcloud';
 export const client_id = "0PKz7xjH5uemKDK8GdHQyO0mU9kZ0fJ2";
 export const client_secret = "pTE5IADHjTRMwCnKsv7NQFdsPqDd7qJc";
 export const search = "https://api.soundcloud.com/tracks?&client_id="+ client_id +"&limit=100&offset=0&q=";
@@ -62,3 +62,11 @@ export const handleLatestTracksClick = function(){
   })
 .catch(error => console.log(error))
 };
+
+export const handleTrackPlay = function(event){
+  let track  = (event.target.name)//266129708
+
+  var sound = SC.stream("tracks/"+track+"/stream", function(sound){
+      sound.play();
+  });
+}

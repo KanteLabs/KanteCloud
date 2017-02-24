@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import SC from 'soundcloud';
 import handleLoginClick from './login';
-import {search, genreName, client_id,client_secret, getImageUrl, IMAGE_SIZES, handleGenreClick, handleLatestTracksClick } from './config';
+import {search, genreName, client_id, client_secret, getImageUrl, IMAGE_SIZES, handleGenreClick, handleLatestTracksClick, handleTrackPlay } from './config';
 import '../search2.css';
 import 'isomorphic-fetch';
 import 'whatwg-fetch';
+
+SC.initialize({client_id: client_id});
+    var stream;
 
 class Search extends Component{
 
@@ -71,6 +74,9 @@ class Search extends Component{
         handleGenreClick.call(this, event);
     };
 
+    handleTrackCall(event){
+        handleTrackPlay.call(this, event);
+    };
     handleLoginClick() {
         SC.initialize({
         client_id: client_id,
@@ -85,10 +91,6 @@ class Search extends Component{
         prompt('Hello, ' + me.username);
         });
     }
-
-    handleStreamCall(){
-        alert("name");
-    };
 
     render(){
         // Desctructuring the state
@@ -106,9 +108,9 @@ class Search extends Component{
                         <a className="genreItem" name={genreName[3]} onClick={ event =>this.handleGenreCall(event)}>R&B</a>
                         <a className="genreItem" name={genreName[4]} onClick={ event =>this.handleGenreCall(event)}>EDM</a>
                         <a className="genreItem" name={genreName[5]} onClick={ event =>this.handleGenreCall(event)}>Dubstep</a>
-                        <input className="textInput" type="text" value={this.state.value} placeholder="Enter a Artist, Song, or Album.." onChange={event => this.handleChange(event)} onKeyPress={this.handleOnKeyPress} />
+                        <input className="textInput" type="text" value={this.state.value} placeholder="Search" onChange={event => this.handleChange(event)} onKeyPress={this.handleOnKeyPress} />
                         <a className="navItem" type="button" onClick={() => this.handleSearchSubmit()}>Search</a>
-                        <a className="navItem" type="button" onClick={() => this.handleLatestTracksClick()}>Latest</a>              
+                        <a className="navItem" type="button" onClick={() => this.handleLatestTracksClick()}>Latest</a>            
                     </div>
                 </div>
                 <div id="trackViewer">
@@ -119,11 +121,17 @@ class Search extends Component{
     }
     //This configures what should be loaded from a search query
     renderTrack({id, user_id, title, artwork_url, permalink_url, stream_url,user}){
+        function  handleTrackCall(event){
+            return(
+                <audio controls preload="none"><source src={'https://api.soundcloud.com/tracks/'+id+'/stream?format=json&client_id=0PKz7xjH5uemKDK8GdHQyO0mU9kZ0fJ2'} type="audio/mpeg"/> </audio>
+            )
+        }
+
         return( 
             <li key={id}>
                 <div className="trackDetails">
                     <div className="trackImg" style={{backgroundImage: `url(${getImageUrl(artwork_url, IMAGE_SIZES.XLARGE)})`}}>
-                        <div className="overlay" name={id}>
+                        <div className="overlay" name={id} onClick={ event=>handleTrackCall(event)}>
                             <p className="playIcon">&#9654;</p>
                         </div>
                     </div>
@@ -132,11 +140,13 @@ class Search extends Component{
                         <a href="#trackProfile" className="songTitle">{title}</a>
                         <a href={'http://api.soundcloud.com/users/3207?client_id='+ client_id} className="userName">{user.username}</a>
                     </div>
+                    <audio controls preload="none"><source src={'https://api.soundcloud.com/tracks/'+id+'/stream?format=json&client_id=0PKz7xjH5uemKDK8GdHQyO0mU9kZ0fJ2'} type="audio/mpeg"/> </audio>
                 </div>
             </li>
         )
     }
+    
 };
 
 export default Search;
-//&#9654;
+//&#9654;<audio controls><source src={'https://api.soundcloud.com/tracks/'+id+'/stream?format=json&client_id=0PKz7xjH5uemKDK8GdHQyO0mU9kZ0fJ2'} type="audio/mpeg"/> </audio>

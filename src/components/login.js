@@ -1,7 +1,6 @@
 import { client_id } from './config';
 import SC from 'soundcloud';
-
-export const handleLoginClick = function() {
+export function handleLoginClick() {
 	SC.initialize({
   	client_id: client_id,
   	redirect_uri: 'https://kantelabs.github.io/KanteCloud/callback.html',
