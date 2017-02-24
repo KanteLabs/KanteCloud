@@ -63,10 +63,26 @@ export const handleLatestTracksClick = function(){
 .catch(error => console.log(error))
 };
 
-export const handleTrackPlay = function(event){
-  let track  = (event.target.name)//266129708
+export const handleTrackPlay = function(track){
+ SC.initialize({client_id: client_id, client_secret: client_secret});
 
-  var sound = SC.stream("tracks/"+track+"/stream", function(sound){
-      sound.play();
+  var player = SC.stream("tracks/"+track+"/stream", {useHTML5Audio: true},
+    function(player){
+      player.play();
+  });
+}
+
+export const handleLoginClick = function() {
+  SC.initialize({
+    client_id: client_id,
+    redirect_uri: 'https://kantelabs.github.io/KanteCloud/callback.html',
+    oauth_token: ""
+  });
+
+  // initiate auth popup
+  SC.connect().then(function() {
+      return SC.get('/me');
+  }).then(function(me) {
+    prompt('Hello, ' + me.username);
   });
 }
