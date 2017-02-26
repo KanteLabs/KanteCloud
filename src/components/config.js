@@ -83,6 +83,6 @@ export const handleLoginClick = function() {
   SC.connect().then(function() {
       return SC.get('/me');
   }).then(function(me) {
-    prompt('Hello, ' + me.username);
+    alert('Hello, ' + me.username);
   });
 }
