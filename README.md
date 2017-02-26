@@ -19,6 +19,7 @@ $ npm start
 The goals for this project:
 
 **Continue to work on design of project**
+
 1. The ability for users to log in and view tracks that they like.
 2. Ability to view different users profiles, and comments.
 3. Ability to record and upload tracks.
