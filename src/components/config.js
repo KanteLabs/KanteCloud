@@ -1,10 +1,14 @@
-
 import SC from 'soundcloud';
-export const client_id = "0PKz7xjH5uemKDK8GdHQyO0mU9kZ0fJ2";
+export const client_id= "0PKz7xjH5uemKDK8GdHQyO0mU9kZ0fJ2";
 export const client_secret = "pTE5IADHjTRMwCnKsv7NQFdsPqDd7qJc";
-export const search = "https://api.soundcloud.com/tracks?&client_id="+ client_id +"&limit=100&offset=0&q=";
-export const newTracks = "https://api.soundcloud.com/tracks?format=json&client_id=" + client_id;
-export const genreTag = "https://api.soundcloud.com/tracks?&client_id=" + client_id + "&limit=50&offset=0&tags=";
+
+export const Config = {
+  hi: 'hello',
+  search: `https://api.soundcloud.com/tracks?&client_id=${client_id}&limit=100&offset=0&q=`,
+  newTracks: `https://api.soundcloud.com/tracks?format=json&client_id=${client_id}`,
+  genreTag: `https://api.soundcloud.com/tracks?&client_id=${client_id}&limit=50&offset=0&tags=`
+  
+}
 
 export const genreName = [
 	"Pop",
@@ -41,7 +45,7 @@ export function getImageUrl(s, size = null) {
 export const handleGenreClick = function(event){
   let name = (event.target.name);
 
-  fetch(genreTag + name, { method:"GET" })
+  fetch(Config.genreTag + name, { method:"GET" })
   .then(response => response.json())
   .catch(error => console.log(error))
   .then(trackInfo => {   
@@ -53,7 +57,7 @@ export const handleGenreClick = function(event){
 export const handleLatestTracksClick = function(){
   event.preventDefault();
 
-  fetch(newTracks, { method:"GET" })
+  fetch(Config.newTracks, { method:"GET" })
   .then(response => response.json())
   .catch(error => console.log(error))
   .then(trackInfo => {   
@@ -64,7 +68,7 @@ export const handleLatestTracksClick = function(){
 };
 
 export const handleTrackPlay = function(track){
- SC.initialize({client_id: client_id, client_secret: client_secret});
+ SC.initialize({client_id: Config.client_id, client_secret: Config.client_secret});
 
   var player = SC.stream("tracks/"+track+"/stream", {useHTML5Audio: true},
     function(player){
@@ -74,7 +78,7 @@ export const handleTrackPlay = function(track){
 
 export const handleLoginClick = function() {
   SC.initialize({
-    client_id: client_id,
+    client_id: Config.client_id,
     redirect_uri: 'https://kantelabs.github.io/KanteCloud/callback.html',
     oauth_token: ""
   });

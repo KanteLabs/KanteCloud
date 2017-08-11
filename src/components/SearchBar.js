@@ -34,16 +34,16 @@ class Search extends Component{
     };    
 
     //This autoload tracks so that the page is not blank
-    componentDidMount(){
-        fetch(search + "Chance the Rapper", { method:"GET" })
-        .then(response => response.json())
-        .catch(error => console.log(error))
-        .then(trackInfo => {   
-            //json.map(entity => tracks.push(entity.title))
-            this.setState({ trackInfo: trackInfo })   
-        })
-        .catch(error => console.log(error))
-    };
+    // componentDidMount(){
+    //     fetch(search + "Chance the Rapper", { method:"GET" })
+    //     .then(response => response.json())
+    //     .catch(error => console.log(error))
+    //     .then(trackInfo => {   
+    //         //json.map(entity => tracks.push(entity.title))
+    //         this.setState({ trackInfo: trackInfo })   
+    //     })
+    //     .catch(error => console.log(error))
+    // };
     
     handleChange(event){
         event.preventDefault();
