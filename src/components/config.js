@@ -42,18 +42,6 @@ export function getImageUrl(s, size = null) {
   }
 }
 
-export const handleGenreClick = function(event){
-  let name = (event.target.name);
-
-  fetch(Config.genreTag + name, { method:"GET" })
-  .then(response => response.json())
-  .catch(error => console.log(error))
-  .then(trackInfo => {   
-      this.setState({ trackInfo: trackInfo })   
-  })
-  .catch(error => console.log(error))
-}
-
 export const handleLatestTracksClick = function(){
   event.preventDefault();
 

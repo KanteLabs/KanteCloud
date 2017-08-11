@@ -2,10 +2,8 @@ import React from 'react';
 import {Config, getImageUrl, IMAGE_SIZES} from './config';
 
 const TrackViewer = (props) => {
-    console.log(props.trackInfo)
     let data = props.trackInfo;
     return(
-        // <h1>Track info </h1>
      <ul className="trackGallery">
          {data.map(({id, user_id, title, artwork_url, permalink_url, stream_url,user})=>{
             return(
