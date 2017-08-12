@@ -52,9 +52,6 @@ class Search extends Component{
     }
 
     render(){
-        // Desctructuring the state
-        const {trackInfo } = this.state;
-
         function handleTrackCall(event){
         let track = (event.target.title)
         console.log(track)
@@ -68,20 +65,25 @@ class Search extends Component{
         }
 
         return(
-            <div className="searchApp">
-                <div className="navbar">
-                    <ul className="genreList">
-                        <li className="genreItem active" name={genreName[0]} onClick={ (event) =>this.handleGenreCall(event)}>Pop</li>
-                        <li className="genreItem" name={genreName[1]} onClick={ event =>this.handleGenreCall(event)}>Hip-Hop</li>
-                        <li className="genreItem" name={genreName[2]} onClick={ event =>this.handleGenreCall(event)}>Reggae</li>
-                        <li className="genreItem" name={genreName[3]} onClick={ event =>this.handleGenreCall(event)}>R&B</li>
-                        <li className="genreItem" name={genreName[4]} onClick={ event =>this.handleGenreCall(event)}>EDM</li>
-                        <li className="genreItem" name={genreName[5]} onClick={ event =>this.handleGenreCall(event)}>Dubstep</li>
-                        <li className="navItem" type="button" onClick={() => this.handleLatestTracksClick()}>Latest</li>
-                        <li className="loginItem" onClick={() =>this.handleLoginClick()}>Login</li>            
-                    </ul>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a className="navbar-brand" href="/">KanteCloud</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div className="navbar-nav">
+                <a className="nav-item nav-link active" href="#">Home <span className="sr-only">(current)</span></a>
+                <a className="nav-item nav-link" href="#" name={genreName[0]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[0]}</a>
+                <a className="nav-item nav-link" href="#" name={genreName[1]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[1]}</a>
+                <a className="nav-item nav-link" href="#" name={genreName[2]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[2]}</a>
+                <a className="nav-item nav-link" href="#" name={genreName[3]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[3]}</a>
+                <a className="nav-item nav-link" href="#" name={genreName[4]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[4]}</a>
+                <a className="nav-item nav-link" href="#" name={genreName[5]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[5]}</a>
+                <a className="nav-item nav-link navItem" href="#" onClick={() =>this.handleLatestTracksClick()}>Latest</a>
+                <a className="nav-item nav-link loginItem" href="#" onClick={() =>this.handleLoginClick()}>Login</a>
                 </div>
             </div>
+            </nav>
         )
     }
 };
