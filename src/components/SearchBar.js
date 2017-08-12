@@ -24,8 +24,7 @@ class Search extends Component{
         super(props);
         //trackInfo will hold the names of the songs, and metadata as well
         this.state = {
-            trackInfo: [],
-            audio: ''
+            trackInfo: []
         };
         this.handleGenreCall = this.handleGenreCall.bind(this)
     };    
@@ -43,10 +42,16 @@ class Search extends Component{
 
     //This will search for the genre tag by using the genreTags provided in the config file
     handleGenreCall(event){
-    let name = (event.target.name);
+        let name = (event.target.name);
+        let menuItem = document.querySelector(`a[name="${name}"]`);
+        if(menuItem.className === 'nav-item nav-link'){
+            document.querySelectorAll('a.nav-item.nav-link').forEach((item)=>{
+                item.className = 'nav-item nav-link';
+            }) 
+            menuItem.className += ' active'
+        }
         fetch(`${Config.genreTag}${name}`, { method:"GET" })
         .then(response => response.json())
-        .catch(error => console.log(error))
         .then(trackInfo => {   
             this.setState({ trackInfo: trackInfo })   
             this.props.appCallBack(trackInfo)
