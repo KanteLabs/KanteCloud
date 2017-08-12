@@ -85,9 +85,9 @@ class App extends Component {
         <div className="App-intro">
           <SearchBar appCallBack={this.searchCallBack}/>
           <input className="textInput" type="text" value={this.state.value} placeholder="Search" onChange={event => this.handleChange(event)} onKeyPress={this.handleOnKeyPress} />
-          <button className="navItem" type="button" onClick={() => this.handleSearchSubmit()}>Search</button>
+          <button className="btn btn-primary" type="button" onClick={() => this.handleSearchSubmit()}>Search</button>
           <div id="trackViewer">
-              {this.state.trackInfo.length>0 ? <TrackViewer trackInfo={this.state.trackInfo}/> : <h1>Search for a song</h1>}
+              {this.state.trackInfo.length>0 ? <TrackViewer trackInfo={this.state.trackInfo} /> : <h1>Loading Tracks</h1>}
           </div>
         </div>
       </div>

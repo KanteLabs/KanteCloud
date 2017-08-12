@@ -1,17 +1,36 @@
-import React from 'react';
-import {Config, getImageUrl, IMAGE_SIZES} from './config';
+import React, {Component} from 'react';
+import TrackPlayer from './TrackPlayer';
+import SC from 'soundcloud';
+import {Config, getImageUrl, IMAGE_SIZES, client_id, client_secret} from './config';
+SC.initialize({client_id: client_id, client_secret: client_secret});
 
-const TrackViewer = (props) => {
-    let data = props.trackInfo;
+class TrackViewer extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            audio: 'https://api.soundcloud.com/tracks/266129708/stream?secret_token%5BuseHTML5Audio%5D=true&format=json&client_id=0PKz7xjH5uemKDK8GdHQyO0mU9kZ0fJ2'
+        }
+    }
+
+    playCallBack(event){
+        let track = (event.target.title)
+        console.log(track)
+        this.setState({
+            audio: `https://api.soundcloud.com/tracks/${track}/stream?secret_token%5BuseHTML5Audio%5D=true&format=json&client_id=${client_id}`
+        })
+    }
+
+    render(){
+    let data = this.props.trackInfo;
     return(
      <ul className="trackGallery">
+         <TrackPlayer data={this.state.audio}/>
          {data.map(({id, user_id, title, artwork_url, permalink_url, stream_url,user})=>{
             return(
                 <li key={id}>
                     <div className="trackDetails">
                         <div className="trackImg" style={{backgroundImage: `url(${getImageUrl(artwork_url, IMAGE_SIZES.XLARGE)})`}}>
-                            <div className="overlay" title={id} onClick={event =>this.handleTrackCall(event)}>
-                                
+                            <div className="overlay" title={id} onClick={(event)=>this.playCallBack(event)}>
                             </div>
                         </div>
                         <div className="trackText">
@@ -27,7 +46,7 @@ const TrackViewer = (props) => {
             )}
         )}
     </ul>
-    )
+    )}
 }
 
 export default TrackViewer;

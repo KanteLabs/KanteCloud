@@ -50,17 +50,16 @@ export const handleTrackPlay = function(track){
   //     player.play();
   // });
 
-  // function handleTrackCall(event){
-        // let track = (event.target.title)
-        // console.log(track)
-        // SC.initialize({client_id: client_id, client_secret: client_secret});
+//   playCallBack(event){
+//     let track = (event.target.title)
+//     console.log(track)
+//     SC.initialize({client_id: client_id, client_secret: client_secret});
 
-        // var player = SC.stream("tracks/"+track+"/stream", {useHTML5Audio: true},
-        //     function(player){
-        //     player.play();
-        // });
-
-        // }
+//     var player = SC.stream("tracks/"+track+"/stream", {useHTML5Audio: true},
+//         function(player){
+//         player.play();
+//     });
+// }
 }
 
 export const handleLoginClick = function() {
