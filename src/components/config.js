@@ -42,26 +42,25 @@ export function getImageUrl(s, size = null) {
   }
 }
 
-export const handleLatestTracksClick = function(){
-  event.preventDefault();
-
-  fetch(Config.newTracks, { method:"GET" })
-  .then(response => response.json())
-  .catch(error => console.log(error))
-  .then(trackInfo => {   
-      //json.map(entity => tracks.push(entity.title))
-      this.setState({ trackInfo: trackInfo })
-  })
-.catch(error => console.log(error))
-};
-
 export const handleTrackPlay = function(track){
  SC.initialize({client_id: Config.client_id, client_secret: Config.client_secret});
 
-  var player = SC.stream("tracks/"+track+"/stream", {useHTML5Audio: true},
-    function(player){
-      player.play();
-  });
+  // var player = SC.stream("tracks/"+track+"/stream", {useHTML5Audio: true},
+  //   function(player){
+  //     player.play();
+  // });
+
+  // function handleTrackCall(event){
+        // let track = (event.target.title)
+        // console.log(track)
+        // SC.initialize({client_id: client_id, client_secret: client_secret});
+
+        // var player = SC.stream("tracks/"+track+"/stream", {useHTML5Audio: true},
+        //     function(player){
+        //     player.play();
+        // });
+
+        // }
 }
 
 export const handleLoginClick = function() {

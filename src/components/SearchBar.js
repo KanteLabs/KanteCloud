@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SC from 'soundcloud';
-import {Config, search, genreName, client_id, client_secret, getImageUrl, IMAGE_SIZES, handleLatestTracksClick, handleTrackPlay, handleLoginClick } from './config';
+import {Config, genreName, client_id, handleLoginClick } from './config';
 import '../search.css';
 import 'isomorphic-fetch';
 import 'whatwg-fetch';
@@ -31,20 +31,27 @@ class Search extends Component{
     };    
 
     handleLatestTracksClick(){
-        handleLatestTracksClick.call(this)
-    };
+        fetch(Config.newTracks, { method:"GET" })
+        .then(response => response.json())
+        .catch(error => console.log(error))
+        .then(trackInfo => {
+            this.setState({ trackInfo: trackInfo })
+            this.props.appCallBack(trackInfo)
+        })
+        .catch(error => console.log(error))
+    }
 
-    //This will search for the genre tag by using the function provided in the config file
+    //This will search for the genre tag by using the genreTags provided in the config file
     handleGenreCall(event){
-        console.log(event.target)
     let name = (event.target.name);
-    fetch(`${Config.genreTag}${name}`, { method:"GET" })
-    .then(response => response.json())
-    .catch(error => console.log(error))
-    .then(trackInfo => {   
-        this.setState({ trackInfo: trackInfo })   
-    })
-    .catch(error => console.log(error))
+        fetch(`${Config.genreTag}${name}`, { method:"GET" })
+        .then(response => response.json())
+        .catch(error => console.log(error))
+        .then(trackInfo => {   
+            this.setState({ trackInfo: trackInfo })   
+            this.props.appCallBack(trackInfo)
+        })
+        .catch(error => console.log(error))
     }
 
     handleLoginClick() {
@@ -52,18 +59,6 @@ class Search extends Component{
     }
 
     render(){
-        function handleTrackCall(event){
-        let track = (event.target.title)
-        console.log(track)
-        SC.initialize({client_id: client_id, client_secret: client_secret});
-
-        var player = SC.stream("tracks/"+track+"/stream", {useHTML5Audio: true},
-            function(player){
-            player.play();
-        });
-
-        }
-
         return(
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <a className="navbar-brand" href="/">KanteCloud</a>

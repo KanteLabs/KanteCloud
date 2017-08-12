@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SearchBar from './components/SearchBar';
 import TrackViewer from './components/TrackViewer';
 import SC from 'soundcloud';
-import {Config, genreName, client_id, client_secret, getImageUrl, IMAGE_SIZES, handleLatestTracksClick, handleTrackPlay, handleLoginClick } from './components/config';
+import {Config, client_id} from './components/config';
 import './search.css';
 import 'isomorphic-fetch';
 import 'whatwg-fetch';
@@ -49,29 +49,32 @@ class App extends Component {
       this.setState({ value: event.target.value });
   }
 
+  searchCallBack = (searchResults) => {
+    this.setState({
+      trackInfo: searchResults
+    })
+  }
+
   handleSearchSubmit(){
-        event.preventDefault();
-        // Using arrow functions for readability
-        if(this.state.value !== ""){        	
-    		fetch(Config.search + this.state.value, { method:"GET" })
-        	.then(response => response.json())
-        	.catch(error => console.log(error))
-        	.then(trackInfo => {
-                this.setState({trackInfo: trackInfo})
-        	})
-        	.catch(error => console.log(error))
-        }event.preventDefault();
+    event.preventDefault();
+    // Using arrow functions for readability
+    if(this.state.value !== ""){        	
+    fetch(Config.search + this.state.value, { method:"GET" })
+      .then(response => response.json())
+      .catch(error => console.log(error))
+      .then(trackInfo => {
+            this.setState({trackInfo: trackInfo})
+      })
+      .catch(error => console.log(error))
+    }event.preventDefault();
     };
 
 
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <h2>KanteCloud</h2>
-        </div>
         <div className="App-intro">
-          <SearchBar />
+          <SearchBar appCallBack={this.searchCallBack}/>
           <input className="textInput" type="text" value={this.state.value} placeholder="Search" onChange={event => this.handleChange(event)} onKeyPress={this.handleOnKeyPress} />
           <button className="navItem" type="button" onClick={() => this.handleSearchSubmit()}>Search</button>
           <div id="trackViewer">
