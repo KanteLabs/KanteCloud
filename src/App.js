@@ -4,12 +4,21 @@ import TrackViewer from './components/TrackViewer';
 import SC from 'soundcloud';
 import {Config, client_id} from './components/config';
 import './search.css';
-import 'isomorphic-fetch';
-import 'whatwg-fetch';
+import './App.css';
 
 SC.initialize({client_id: client_id});
 
-import './App.css';
+//Prevents more than one track for being played at a time.
+document.addEventListener('play', function(e){
+    var audios = document.getElementsByTagName('audio');
+    for(var i = 0, len = audios.length; i < len;i++){
+        if(audios[i] !== e.target){
+            audios[i].pause();
+        }
+    }
+}, true);
+
+
 
 class App extends Component {
   constructor(props){

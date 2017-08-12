@@ -1,22 +1,6 @@
 import React, { Component } from 'react';
-import SC from 'soundcloud';
-import {Config, genreName, client_id, handleLoginClick } from './config';
+import {Config, genreName, handleLoginClick } from './config';
 import '../search.css';
-import 'isomorphic-fetch';
-import 'whatwg-fetch';
-
-SC.initialize({client_id: client_id});
-
-//Prevents more than one track for being played at a time.
-document.addEventListener('play', function(e){
-    var audios = document.getElementsByTagName('audio');
-    for(var i = 0, len = audios.length; i < len;i++){
-        if(audios[i] !== e.target){
-            audios[i].pause();
-        }
-    }
-}, true);
-
 
 class Search extends Component{
 
