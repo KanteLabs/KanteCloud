@@ -45,6 +45,11 @@ class Search extends Component{
         .catch(error => console.log(error))
     }
 
+    loginSuccess(me){
+        console.log('Login Success')
+        console.log(me.id, me.username)
+    }
+
     handleLoginClick() {
         SC.initialize({
             client_id: Config.client_id,
@@ -52,15 +57,13 @@ class Search extends Component{
             oauth_token: ""
         });
 
-        // initiate auth popup
         SC.connect().then(function() {
             return SC.get('/me');
         }).then((me)=>{
             console.log('Hello, ' + me.username, me.id);
+            this.loginSuccess(me)
             document.querySelector('.loginItem').innerText = me.username;
             SC.get('/me/favorites')
-        }).then((me)=>{
-            console.log(me)
             fetch(`https://api.soundcloud.com/users/${me.id}/favorites/?&client_id=${client_id}`, { method:"GET" })
             .then(response => response.json())
             .then(trackInfo => {   
@@ -69,6 +72,7 @@ class Search extends Component{
             })
             .catch(error => console.log(error))
         })
+
     }
 
     render(){
