@@ -18,6 +18,12 @@ class TrackViewer extends Component {
         this.setState({
             audio: `https://api.soundcloud.com/tracks/${track}/stream?secret_token%5BuseHTML5Audio%5D=true&format=json&client_id=${client_id}`
         })
+        var audio = document.querySelector('audio.react-audio-player');
+        if(audio.paused){
+            audio.play()
+        }else{
+            audio.pause()
+        }
     }
 
     render(){

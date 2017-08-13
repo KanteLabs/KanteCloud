@@ -16,8 +16,6 @@ class TrackPlayer extends Component{
     componentDidUpdate(){
         if(!this.state.autoPlay){
             this.setState({autoPlay: true})
-        }else{
-            null
         }
     }
     render(){
