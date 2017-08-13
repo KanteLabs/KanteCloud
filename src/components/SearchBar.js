@@ -55,7 +55,7 @@ class Search extends Component{
         // initiate auth popup
         SC.connect().then(function() {
             return SC.get('/me');
-        }).then(function(me) {
+        }).then((me)=>{
             console.log('Hello, ' + me.username, me.id);
             document.querySelector('.loginItem').innerText = me.username;
             SC.get('/me/favorites')
