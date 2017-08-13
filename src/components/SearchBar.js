@@ -46,18 +46,29 @@ class Search extends Component{
 
     handleLoginClick() {
         SC.initialize({
-    client_id: Config.client_id,
-    redirect_uri: 'https://kantelabs.github.io/KanteCloud/callback.html',
-    oauth_token: ""
-  });
+            client_id: Config.client_id,
+            redirect_uri: 'https://kantelabs.github.io/KanteCloud/callback.html',
+            oauth_token: ""
+        });
 
-  // initiate auth popup
-  SC.connect().then(function() {
-      return SC.get('/me');
-  }).then(function(me) {
-    alert('Hello, ' + me.username);
-    return SC.get('/me/favorites')
-  });
+        // initiate auth popup
+        SC.connect().then(function() {
+            return SC.get('/me');
+        }).then(function(me) {
+            console.log('Hello, ' + me.username);
+            document.querySelector('.loginItem').innerText = me.username;
+            SC.get('/me/favorites')
+            this.setState({
+                trackInfo: SC.get('/me/favorites')
+            })
+        }).then((res)=>{
+            this.userFavorites.call(res)
+        })
+    }
+
+    userFavorites(res){
+        console.log('Hi amidou')
+        console.log(res)
     }
 
     render(){

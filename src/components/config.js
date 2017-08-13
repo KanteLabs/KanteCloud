@@ -73,6 +73,8 @@ export const handleLoginClick = function() {
   SC.connect().then(function() {
       return SC.get('/me');
   }).then(function(me) {
-    alert('Hello, ' + me.username);
-  });
+    console.log('Hello, ' + me.username);
+    document.querySelector('.loginItem').innerText = me.username;
+    SC.get('/me/favorites')
+  })
 }
