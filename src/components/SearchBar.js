@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SC from 'soundcloud';
-import {Config, genreName, handleLoginClick } from './config';
+import {Config, genreName, client_id } from './config';
 import '../search.css';
 
 class Search extends Component{
@@ -58,17 +58,13 @@ class Search extends Component{
             console.log('Hello, ' + me.username);
             document.querySelector('.loginItem').innerText = me.username;
             SC.get('/me/favorites')
-            this.setState({
-                trackInfo: SC.get('/me/favorites')
+            fetch(`https://api.soundcloud.com/users/${me.id}/favorites/?&client_id=${client_id}`)
+            .then(response => response.json())
+            .then(trackInfo => {   
+                this.setState({ trackInfo: trackInfo })
             })
-        }).then((res)=>{
-            this.userFavorites.call(res)
+            .catch(error => console.log(error))
         })
-    }
-
-    userFavorites(res){
-        console.log('Hi amidou')
-        console.log(res)
     }
 
     render(){
