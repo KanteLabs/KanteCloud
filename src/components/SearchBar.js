@@ -64,10 +64,8 @@ class Search extends Component{
             fetch(`https://api.soundcloud.com/users/${me.id}/favorites/?&client_id=${client_id}`, { method:"GET" })
             .then(response => response.json())
             .then(trackInfo => {   
-                this.setState({ 
-                    trackInfo: trackInfo,
-                    user: me
-                })
+                this.setState({ trackInfo: trackInfo})
+                this.props.appCallBack(trackInfo)
             })
             .catch(error => console.log(error))
         })
