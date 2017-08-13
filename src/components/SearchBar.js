@@ -60,6 +60,7 @@ class Search extends Component{
             document.querySelector('.loginItem').innerText = me.username;
             SC.get('/me/favorites')
         }).then((me)=>{
+            console.log(me)
             fetch(`https://api.soundcloud.com/users/${me.id}/favorites/?&client_id=${client_id}`, { method:"GET" })
             .then(response => response.json())
             .then(trackInfo => {   
