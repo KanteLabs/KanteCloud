@@ -73,7 +73,3 @@ class Search extends Component{
 };
 
 export default Search;
-
-/*
-<p className="playIcon">&#9654;</p>
-*/

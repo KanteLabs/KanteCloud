@@ -14,20 +14,26 @@ class TrackViewer extends Component {
 
     playCallBack(event){
         let track = (event.target.title)
+        let audio = document.querySelector('audio.react-audio-player');
+        let divItem = document.querySelector(`div.overlay[title='${track}']`)
+        console.log(divItem)
         console.log(track)
         this.setState({
             audio: `https://api.soundcloud.com/tracks/${track}/stream?secret_token%5BuseHTML5Audio%5D=true&format=json&client_id=${client_id}`
         })
-        var audio = document.querySelector('audio.react-audio-player');
         if(audio.paused){
             audio.play()
+            divItem.innerHTML = ' || ';
         }else{
             audio.pause()
+            divItem.innerHTML = ' ▶ ';
         }
+
     }
 
     render(){
     let data = this.props.trackInfo;
+    let playIcon = `▶`;
     return(
      <ul className="trackGallery">
          <TrackPlayer data={this.state.audio}/>
@@ -37,6 +43,7 @@ class TrackViewer extends Component {
                     <div className="trackDetails">
                         <div className="trackImg" style={{backgroundImage: `url(${getImageUrl(artwork_url, IMAGE_SIZES.XLARGE)})`}}>
                             <div className="overlay" title={id} onClick={(event)=>this.playCallBack(event)}>
+                                {playIcon}
                             </div>
                         </div>
                         <div className="trackText">
