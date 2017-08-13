@@ -47,9 +47,9 @@ class TrackViewer extends Component {
                             <a href="#trackProfile" className="songTitle" title={title}>{title}</a>
                             <a href={'http://api.soundcloud.com/users/3207?client_id='+Config.client_id} className="userName">{user.username}</a>
                         </div>
-                        <audio controls preload="none">
+                        {/* <audio controls preload="none">
                             <source src={'https://api.soundcloud.com/tracks/'+id+'/stream?format=json&client_id=0PKz7xjH5uemKDK8GdHQyO0mU9kZ0fJ2'} type="audio/mpeg"/>
-                        </audio>
+                        </audio> */}
                     </div>
                 </li>
             )}

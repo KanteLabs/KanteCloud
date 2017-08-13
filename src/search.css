@@ -33,25 +33,50 @@ button {
   justify-content: center; }
 
 /*Gallery Results Layout*/
+@media(max-width: 790px){
 .navbar {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-  margin-bottom: 1em; }
+  flex-flow: row wrap;}
+
+}
   .navbar .genreList {
     display: flex;
     flex-flow: row wrap; }
     .navbar .genreList .textInput {
       padding: 15px; }
+.textInput {
+    display: flex;
+    position: fixed;
+    top: 3.5em;
+    z-index: 1029;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
 
+input[type="text"] {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    padding: 0.5em;
+}
+
+button.btn.btn-primary {
+    border-radius: 0;
+}
+  div#trackViewer {
+    margin-top: 8em;
+}
 .trackGallery {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around; }
-
+.trackGallery li{
+  margin-right: 1em;
+}
 .trackDetails {
   width: 300px;
-  height: 300px;
+  height: auto;
   background: #FFFFFF;
   margin-bottom: 1em;
   position: relative;
@@ -116,8 +141,11 @@ button {
   border-bottom: #0000cc; }
 
 audio {
-  width: 100%;
-  bottom: 7px;
-  position: relative; }
+      width: 100%;
+    bottom: 0em;
+    position: fixed;
+    z-index: 9999; }
+
+
 
 /*# sourceMappingURL=search.css.map */

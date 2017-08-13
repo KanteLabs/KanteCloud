@@ -49,21 +49,20 @@ class Search extends Component{
 
     render(){
         return(
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
             <a className="navbar-brand" href="/">KanteCloud</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div className="navbar-nav">
-                <a className="nav-item nav-link active" href="#">Home <span className="sr-only">(current)</span></a>
-                <a className="nav-item nav-link" href="#" name={genreName[0]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[0]}</a>
-                <a className="nav-item nav-link" href="#" name={genreName[1]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[1]}</a>
-                <a className="nav-item nav-link" href="#" name={genreName[2]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[2]}</a>
-                <a className="nav-item nav-link" href="#" name={genreName[3]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[3]}</a>
-                <a className="nav-item nav-link" href="#" name={genreName[4]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[4]}</a>
-                <a className="nav-item nav-link" href="#" name={genreName[5]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[5]}</a>
-                <a className="nav-item nav-link navItem" href="#" onClick={() =>this.handleLatestTracksClick()}>Latest</a>
+                <div className="navbar-nav"><hr/>
+                <a className="nav-item nav-link" href="#" name={genreName[0]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[0]}</a><hr/>
+                <a className="nav-item nav-link" href="#" name={genreName[1]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[1]}</a><hr/>
+                <a className="nav-item nav-link" href="#" name={genreName[2]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[2]}</a><hr/>
+                <a className="nav-item nav-link" href="#" name={genreName[3]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[3]}</a><hr/>
+                <a className="nav-item nav-link" href="#" name={genreName[4]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[4]}</a><hr/>
+                <a className="nav-item nav-link" href="#" name={genreName[5]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[5]}</a><hr/>
+                <a className="nav-item nav-link navItem" href="#" onClick={() =>this.handleLatestTracksClick()}>Latest</a><hr/>
                 <a className="nav-item nav-link loginItem" href="#" onClick={() =>this.handleLoginClick()}>Login</a>
                 </div>
             </div>

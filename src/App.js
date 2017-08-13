@@ -84,8 +84,10 @@ class App extends Component {
       <div className="App">
         <div className="App-intro">
           <SearchBar appCallBack={this.searchCallBack}/>
-          <input className="textInput" type="text" value={this.state.value} placeholder="Search" onChange={event => this.handleChange(event)} onKeyPress={this.handleOnKeyPress} />
-          <button className="btn btn-primary" type="button" onClick={() => this.handleSearchSubmit()}>Search</button>
+          <div className="textInput">
+            <input type="text" value={this.state.value} placeholder="Search" onChange={event => this.handleChange(event)} onKeyPress={this.handleOnKeyPress} />
+            <button className="btn btn-primary" type="button" onClick={() => this.handleSearchSubmit()}>Search</button>
+          </div>
           <div id="trackViewer">
               {this.state.trackInfo.length>0 ? <TrackViewer trackInfo={this.state.trackInfo} /> : <h1>Loading Tracks</h1>}
           </div>
