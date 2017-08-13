@@ -16,24 +16,20 @@ class TrackViewer extends Component {
         let track = (event.target.title)
         let audio = document.querySelector('audio.react-audio-player');
         let divItem = document.querySelector(`div.overlay[title='${track}']`)
-        console.log(divItem)
-        console.log(track)
+        console.log(track, divItem)
+
+        audio.paused ? audio.play() : audio.pause();
+        divItem.innerHTML === ' ▶ ' ? divItem.innerHTML = ' || ' : divItem.innerHTML = ' ▶ ';
+
         this.setState({
             audio: `https://api.soundcloud.com/tracks/${track}/stream?secret_token%5BuseHTML5Audio%5D=true&format=json&client_id=${client_id}`
         })
-        if(audio.paused){
-            audio.play()
-            divItem.innerHTML = ' || ';
-        }else{
-            audio.pause()
-            divItem.innerHTML = ' ▶ ';
-        }
 
     }
 
     render(){
     let data = this.props.trackInfo;
-    let playIcon = `▶`;
+    let playIcon = ' ▶ ';
     return(
      <ul className="trackGallery">
          <TrackPlayer data={this.state.audio}/>
