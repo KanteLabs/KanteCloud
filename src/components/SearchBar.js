@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SC from 'soundcloud';
 import {Config, genreName, handleLoginClick } from './config';
 import '../search.css';
 
@@ -44,7 +45,19 @@ class Search extends Component{
     }
 
     handleLoginClick() {
-        handleLoginClick.call(this)
+        SC.initialize({
+    client_id: Config.client_id,
+    redirect_uri: 'https://kantelabs.github.io/KanteCloud/callback.html',
+    oauth_token: ""
+  });
+
+  // initiate auth popup
+  SC.connect().then(function() {
+      return SC.get('/me');
+  }).then(function(me) {
+    alert('Hello, ' + me.username);
+    return SC.get('/me/favorites')
+  });
     }
 
     render(){
