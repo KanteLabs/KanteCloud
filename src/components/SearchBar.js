@@ -61,7 +61,7 @@ class Search extends Component{
             return SC.get('/me');
         }).then((me)=>{
             console.log('Hello, ' + me.username, me.id);
-            this.loginSuccess(me)
+            this.loginSuccess.bind(me)
             document.querySelector('.loginItem').innerText = me.username;
             SC.get('/me/favorites')
             fetch(`https://api.soundcloud.com/users/${me.id}/favorites/?&client_id=${client_id}`, { method:"GET" })
