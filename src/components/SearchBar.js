@@ -9,7 +9,8 @@ class Search extends Component{
         super(props);
         //trackInfo will hold the names of the songs, and metadata as well
         this.state = {
-            trackInfo: []
+            trackInfo: [],
+            user: null
         };
         this.handleGenreCall = this.handleGenreCall.bind(this)
     };    
@@ -55,14 +56,17 @@ class Search extends Component{
         SC.connect().then(function() {
             return SC.get('/me');
         }).then(function(me) {
-            console.log('Hello, ' + me.username);
-            console.log(me.id)
+            console.log('Hello, ' + me.username, me.id);
             document.querySelector('.loginItem').innerText = me.username;
             SC.get('/me/favorites')
+        }).then((me)=>{
             fetch(`https://api.soundcloud.com/users/${me.id}/favorites/?&client_id=${client_id}`, { method:"GET" })
             .then(response => response.json())
             .then(trackInfo => {   
-                this.setState({ trackInfo: trackInfo })
+                this.setState({ 
+                    trackInfo: trackInfo,
+                    user: me
+                })
             })
             .catch(error => console.log(error))
         })
