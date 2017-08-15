@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import TrackPlayer from './TrackPlayer';
+import UserProfile from './UserProfile';
 import SC from 'soundcloud';
-import {Config, getImageUrl, IMAGE_SIZES, client_id, client_secret} from './config';
+import {getImageUrl, IMAGE_SIZES, client_id, client_secret} from './config';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 SC.initialize({client_id: client_id, client_secret: client_secret});
 
 class TrackViewer extends Component {
@@ -31,7 +33,9 @@ class TrackViewer extends Component {
     let data = this.props.trackInfo;
     let playIcon = ' ▶ ';
     return(
+    <Router>
      <ul className="trackGallery">
+         <Route exact path='/users/:userId' component={UserProfile} />
          <TrackPlayer data={this.state.audio}/>
          {data.map(({id, user_id, title, artwork_url, permalink_url, stream_url,user})=>{
             return(
@@ -45,8 +49,9 @@ class TrackViewer extends Component {
                         <div className="trackText">
                             <img className="userAvatar" src={user.avatar_url } alt=""/>
                             <a href="#trackProfile" className="songTitle" title={title}>{title}</a>
-                            <a href={`http://api.soundcloud.com/users/3207?client_id=${Config.client_id}`} className="userName">{user.username}</a>
+                            <Link to={`/users/${user_id}`} className="userName">{user.username}</Link>
                             <a href="#"> ♡ or ❤️</a>
+                            
                         </div>
                         {/* <audio controls preload="none">
                             <source src={'https://api.soundcloud.com/tracks/'+id+'/stream?format=json&client_id=0PKz7xjH5uemKDK8GdHQyO0mU9kZ0fJ2'} type="audio/mpeg"/>
@@ -56,6 +61,7 @@ class TrackViewer extends Component {
             )}
         )}
     </ul>
+    </Router>
     )}
 }
 
