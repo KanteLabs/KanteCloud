@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import SearchBar from './components/SearchBar';
 import TrackViewer from './components/TrackViewer';
-import UserProfile from './components/UserProfile';
 import SC from 'soundcloud';
 import {Config, client_id} from './components/config';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import './search.css';
 import './App.css';
 

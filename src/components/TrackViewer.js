@@ -3,7 +3,7 @@ import TrackPlayer from './TrackPlayer';
 import UserProfile from './UserProfile';
 import SC from 'soundcloud';
 import {getImageUrl, IMAGE_SIZES, client_id, client_secret} from './config';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Route, Link} from 'react-router-dom';
 SC.initialize({client_id: client_id, client_secret: client_secret});
 
 class TrackViewer extends Component {

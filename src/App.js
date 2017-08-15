@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AppContainer from './AppContainer';
 import UserProfile from './components/UserProfile';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import './search.css';
 import './App.css';
 
