@@ -33,7 +33,6 @@ class TrackViewer extends Component {
     let data = this.props.trackInfo;
     let playIcon = ' ▶ ';
     return(
-    <Router>
      <ul className="trackGallery">
          <Route exact path='/users/:userId' component={UserProfile} />
          <TrackPlayer data={this.state.audio}/>
@@ -61,7 +60,6 @@ class TrackViewer extends Component {
             )}
         )}
     </ul>
-    </Router>
     )}
 }
 
