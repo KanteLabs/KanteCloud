@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ProfileRender from './ProfileRender';
 import {client_id} from './config';
 
 class UserProfile extends Component {
@@ -25,7 +26,10 @@ class UserProfile extends Component {
 
     render(){
     return(
-        <h1>{JSON.stringify(this.props.match.params.userid)}</h1>
+        <div className="userProfile">
+            <h1>{JSON.stringify(this.props.match.params.userid)}</h1>
+            {this.state.userData !== {} ? <ProfileRender data={this.state.userData}/> : <h1> Fetching Profile of {this.props.match.params.userid} </h1>}
+        </div>
         )
     }
 }
