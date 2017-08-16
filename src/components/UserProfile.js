@@ -6,7 +6,7 @@ class UserProfile extends Component {
     constructor(props){
         super(props);
         this.state = {
-            userData: {}
+            userData: undefined
         }
     }
 
@@ -28,7 +28,7 @@ class UserProfile extends Component {
     return(
         <div className="userProfile">
             <h1>{JSON.stringify(this.props.match.params.userid)}</h1>
-            {this.state.userData !== {} ? <ProfileRender data={this.state.userData}/> : <h1> Fetching Profile of {this.props.match.params.userid} </h1>}
+            {this.state.userData !== undefined ? <ProfileRender data={this.state.userData}/> : <h1> Fetching Profile of {this.props.match.params.userid} </h1>}
         </div>
         )
     }
