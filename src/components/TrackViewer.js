@@ -47,9 +47,9 @@ class TrackViewer extends Component {
                         </div>
                         <div className="trackText">
                             <img className="userAvatar" src={user.avatar_url } alt=""/>
-                            <a href="#trackProfile" className="songTitle" title={title}>{title}</a>
-                            <Link to={`/users/${user_id}`} className="userName">{user.username}</Link>
-                            <a href="#"> ♡ or ❤️</a>
+                            <Link to={`/${user.permalink}/${user_id}/${id}`} className="songTitle">{title}</Link>
+                            <Link to={`/${user.permalink}/${user_id}`} className="userName">{user.username}</Link>
+                            {/* <a href="#"> ♡ or ❤️</a> */}
                             
                         </div>
                         {/* <audio controls preload="none">

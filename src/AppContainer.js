@@ -47,7 +47,6 @@ class AppContainer extends Component {
     //This Function handles when a user presses the 'Enter' key
     //If this.state.value has a value then the function will call handleSearchSubmit, else it will do nothing
     handleOnKeyPress = (event) => {
-      this.componentWillUnmount()
     	if(event.charCode === 13){    		
     		this.state.value !== "" ? event.preventDefault(this.handleSearchSubmit()) : event.preventDefault();
     		event.preventDefault();  
