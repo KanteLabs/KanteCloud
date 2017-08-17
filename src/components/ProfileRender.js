@@ -33,7 +33,7 @@ class ProfileRender extends Component {
                     <span className="onlineStatus">{profile.online ? '🔵' : '🔴'}</span> 
                 </h1>
                 {profile.full_name !== "" ? <h6>{profile.full_name}</h6> : null}
-                {profile.description ? <h6>{profile.description}</h6> : null}
+                {profile.city !== "" && profile.country !== "" ? <h6>{profile.city } - {profile.country}</h6> : null}
                 <div className="profileImage" style={styles.profileImage}></div>
             </div>
             <div className="follows">
@@ -49,14 +49,16 @@ class ProfileRender extends Component {
                     <li>Playlists: <span>{profile.playlist_count}</span> </li>
                     <li>Favorites: <span>{profile.public_favorites_count}</span> </li>
                     <li>Reposts: <span>{profile.reposts_count}</span> </li>
-                    <li>Tracks: <span>{profile.track_count}</span> </li>
                 </ul>
             </div>
             <div className="profileBody">
-
+                {profile.description ? <h4>{profile.description}</h4> : null}
             </div>
             <div className="profileEnd">
-
+                <ul>
+                    {profile.myspace_name ? <li><p>{profile.myspace_name}</p></li> : null}
+                    {profile.website ? <li><a href={profile.website}>{profile.website}</a></li> : null}
+                </ul>
             </div>
         </div>
         )
