@@ -43,6 +43,15 @@ class ProfileRender extends Component {
                     <li>Followers: <span>{profile.followers_count}</span></li>
                 </ul>
             </div>
+            <div className="activity">
+                <ul>
+                    <li>Tracks: <span>{profile.track_count}</span> </li>
+                    <li>Playlists: <span>{profile.playlist_count}</span> </li>
+                    <li>Favorites: <span>{profile.public_favorites_count}</span> </li>
+                    <li>Reposts: <span>{profile.reposts_count}</span> </li>
+                    <li>Tracks: <span>{profile.track_count}</span> </li>
+                </ul>
+            </div>
             <div className="profileBody">
 
             </div>
