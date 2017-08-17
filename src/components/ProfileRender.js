@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 class ProfileRender extends Component {
     constructor(props){
         super(props);
@@ -27,8 +28,12 @@ class ProfileRender extends Component {
     return(
         <div className="userProfile">
             <div className="profileHead">
-                <h1 className="username">{profile.username}</h1>
-                {profile.description?<h6>{profile.description}</h6>:null}
+                <h1 className="username">
+                    <Link to={`/${profile.permalink}/${profile.id}`}>{profile.username}</Link> 
+                    <span className="onlineStatus">{profile.online ? '🔵' : '🔴'}</span> 
+                </h1>
+                {profile.full_name !== "" ? <h6>{profile.full_name}</h6> : null}
+                {profile.description ? <h6>{profile.description}</h6> : null}
                 <div className="profileImage" style={styles.profileImage}></div>
             </div>
         </div>
