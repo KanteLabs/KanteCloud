@@ -15,6 +15,7 @@ class App extends Component {
       audioPlaying: false,
       audio: 'https://api.soundcloud.com/tracks/266129708/stream?secret_token%5BuseHTML5Audio%5D=true&format=json&client_id=0PKz7xjH5uemKDK8GdHQyO0mU9kZ0fJ2'
     }
+    this.playAudio = this.playAudio.bind(this)
   }
 
   playAudio(track){
@@ -24,6 +25,7 @@ class App extends Component {
     this.setState({
       audio: track
     })
+    // finalAudioCallBack={this.playAudio}
   }
 
   render() {
@@ -31,7 +33,7 @@ class App extends Component {
     <Router>
       <div className="App">
       <Switch>
-        <Route exact path='/' component={AppContainer} finalAudioCallBack={this.playAudio}/>
+        <Route exact path='/' component={AppContainer} />
         <Route exact path='/:username/:userid' component={UserProfile}/>
         <Route exact path='/:username/:userid/:songid' component={SongProfile}/> 
         <Route component={NoMatch} />
