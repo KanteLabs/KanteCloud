@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {client_id} from './config';
 
 class ProfileRender extends Component {
     constructor(props){
