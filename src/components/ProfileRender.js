@@ -12,17 +12,37 @@ class ProfileRender extends Component {
 
     componentDidMount(){
         console.log(`Profile of ${this.props.data.username}`)
-        fetch(`${Config.userTracks}${this.props.data.id}/tracks?client_id=${client_id}`,{method: 'GET'})
-        .then(res=>res.json())
-        .then((res)=>{
+        let userUrls = [
+            `https://api.soundcloud.com/users/${this.props.data.id}/tracks?client_id=${client_id}`,
+            `https://api.soundcloud.com/users/${this.props.data.id}/playlists?client_id=${client_id}`,
+            `https://api.soundcloud.com/users/${this.props.data.id}/followings?client_id=${client_id}`,
+            `https://api.soundcloud.com/users/${this.props.data.id}/followers?client_id=${client_id}`,
+            `https://api.soundcloud.com/users/${this.props.data.id}/favorites?client_id=${client_id}`,
+            `https://api.soundcloud.com/users/${this.props.data.id}/web-profiles?client_id=${client_id}`,
+        
+        ]
+        let urlsState = [
+            {
+                state: {}
+            }
+        ]
+        Promise.all(userUrls.map(url =>
+            fetch(url).then(resp => resp.json())
+        )).then(res => {
             console.log(res)
-            this.setState({
-                userTracks: res
-            })
-        }).catch(err=>console.log(err))
-        this.setState({
-            userData: this.props.data
         })
+
+        // fetch(`${userUrls}`,{method: 'GET'})
+        // .then(res=>res.json())
+        // .then((res)=>{
+        //     console.log(res)
+        //     this.setState({
+        //         userTracks: res
+        //     })
+        // }).catch(err=>console.log(err))
+        // this.setState({
+        //     userData: this.props.data
+        // })
     }
 
     render(){
@@ -137,5 +157,13 @@ GET	                /users/{id}/favorites	    list of tracks favorited by the us
 GET, PUT, DELETE	/users/{id}/favorites/{id}	track favorited by the user
 GET, PUT, DELETE	/users/{id}/web-profiles	list of web profiles
 
-
+let userUrls = [
+    `https://api.soundcloud.com/users/${this.props.data.id}/tracks?client_id=${client_id}`,
+    `https://api.soundcloud.com/users/${this.props.data.id}/playlists?client_id=${client_id}`,
+    `https://api.soundcloud.com/users/${this.props.data.id}/followings?client_id=${client_id}`,
+    `https://api.soundcloud.com/users/${this.props.data.id}/followers?client_id=${client_id}`,
+    `https://api.soundcloud.com/users/${this.props.data.id}/comments?client_id=${client_id}`,
+    `https://api.soundcloud.com/users/${this.props.data.id}/favorites?client_id=${client_id}`,
+    `https://api.soundcloud.com/users/${this.props.data.id}/web-profiles?client_id=${client_id}`,
+]
 */
