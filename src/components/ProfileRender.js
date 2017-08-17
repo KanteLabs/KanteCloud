@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {getImageUrl, IMAGE_SIZES} from './config';
 import {Link} from 'react-router-dom';
 class ProfileRender extends Component {
     constructor(props){
@@ -20,8 +21,7 @@ class ProfileRender extends Component {
     let styles = {
         profileImage: {
             width: '150px',height: '150px',
-            background: `url(${profile.avatar_url}) no-repeat center center`,
-            backgroundSize: 'cover',
+            background: `url(${getImageUrl(profile.avatar_url, IMAGE_SIZES.XLARGE)}) no-repeat center center`,
             borderRadius: '100%',
         }
     }
@@ -35,6 +35,19 @@ class ProfileRender extends Component {
                 {profile.full_name !== "" ? <h6>{profile.full_name}</h6> : null}
                 {profile.description ? <h6>{profile.description}</h6> : null}
                 <div className="profileImage" style={styles.profileImage}></div>
+            </div>
+            <div className="follows">
+                <ul>
+                    <li><span>Follow or Following</span></li>
+                    <li>Following: <span>{profile.followings_count}</span></li>
+                    <li>Followers: <span>{profile.followers_count}</span></li>
+                </ul>
+            </div>
+            <div className="profileBody">
+
+            </div>
+            <div className="profileEnd">
+
             </div>
         </div>
         )

@@ -15,6 +15,10 @@ ul li a {
 button {
   padding: 1em; }
 
+.profileImage{
+  background-size: contain !important;
+}
+
 /*Base CSS Props*/
 .textOverflow, .trackText .userName, .trackText .songTitle {
   display: block;
