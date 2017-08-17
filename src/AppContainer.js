@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SearchBar from './components/SearchBar';
+import NavBar from './components/NavBar';
 import TrackViewer from './components/TrackViewer';
 import SC from 'soundcloud';
 import {Config, client_id} from './components/config';
@@ -26,7 +26,7 @@ class AppContainer extends Component {
     //trackInfo will hold the names of the songs, and metadata as well
     this.state ={
       value: '',
-      audio: '',
+      currAudio: null,
       trackInfo: []
     }
 
@@ -78,17 +78,22 @@ class AppContainer extends Component {
     }event.preventDefault();
     };
 
+    handleAudioPlay(audio){
+      console.log(`Receiving ${audio} and sending to App.js`)
+      console.log(this)
+      this.props.finalAudioCallBack(audio)
+    }
 
   render() {
     return (
         <div className="App-intro">
-          <SearchBar appCallBack={this.searchCallBack}/>
+          <NavBar appCallBack={this.searchCallBack}/>
           <div className="textInput">
             <input type="text" value={this.state.value} placeholder="Search" onChange={event => this.handleChange(event)} onKeyPress={this.handleOnKeyPress} />
             <button className="btn btn-primary" type="button" onClick={() => this.handleSearchSubmit()}>Search</button>
           </div>
           <div id="trackViewer">
-              {this.state.trackInfo.length>0 ? <TrackViewer trackInfo={this.state.trackInfo} /> : <h1>Loading Tracks</h1>}
+              {this.state.trackInfo.length>0 ? <TrackViewer trackInfo={this.state.trackInfo} passAudioCallBack={this.handleAudioPlay}/> : <h1>Loading Tracks</h1>}
           </div>
         </div>
     );

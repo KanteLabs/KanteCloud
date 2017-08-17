@@ -16,16 +16,15 @@ class TrackViewer extends Component {
 
     playCallBack(event){
         let track = (event.target.title)
-        let audio = document.querySelector('audio.react-audio-player');
+        // let audio = document.querySelector('audio.react-audio-player');
         let divItem = document.querySelector(`div.overlay[title='${track}']`)
         console.log(track, divItem)
-
-        audio.paused ? audio.play() : audio.pause();
+        // audio.paused ? audio.play() : audio.pause();
         divItem.innerHTML === ' ▶ ' ? divItem.innerHTML = ' || ' : divItem.innerHTML = ' ▶ ';
-
         this.setState({
             audio: `https://api.soundcloud.com/tracks/${track}/stream?secret_token%5BuseHTML5Audio%5D=true&format=json&client_id=${client_id}`
         })
+        this.props.passAudioCallBack(this.state.audio)
 
     }
 
@@ -35,7 +34,7 @@ class TrackViewer extends Component {
     return(
      <ul className="trackGallery">
          <Route exact path='/users/:userId' component={UserProfile} />
-         <TrackPlayer data={this.state.audio}/>
+          {/* <TrackPlayer data={this.state.audio}/>  */}
          {data.map(({id, user_id, title, artwork_url, permalink_url, stream_url,user})=>{
             return(
                 <li key={id}>
