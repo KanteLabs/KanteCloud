@@ -32,13 +32,13 @@ class App extends Component {
     return (
     <Router>
       <div className="App">
-      <Switch>
-        <Route exact path='/' component={AppContainer} />
-        <Route exact path='/:username/:userid' component={UserProfile}/>
-        <Route exact path='/:username/:userid/:songid' component={SongProfile}/> 
-        <Route component={NoMatch} />
-      </Switch>
-      <TrackPlayer data={this.state.audio}/>
+        <Switch>
+          <Route exact path='/' component={AppContainer} />
+          <Route exact path='/:username/:userid' component={UserProfile}/>
+          <Route exact path='/:username/:userid/:songid' component={SongProfile}/> 
+          <Route component={NoMatch} />
+        </Switch>
+        <TrackPlayer data={this.state.audio}/>
       </div>
     </Router>
     );

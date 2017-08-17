@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 class ProfileRender extends Component {
     constructor(props){
         super(props);
@@ -10,12 +9,28 @@ class ProfileRender extends Component {
 
     componentDidMount(){
         console.log(`Profile of ${this.props.data.username}`)
+        this.setState({
+            userData: this.props.data
+        })
     }
 
     render(){
+    let profile = this.state.userData
+    let styles = {
+        profileImage: {
+            width: '150px',height: '150px',
+            background: `url(${profile.avatar_url}) no-repeat center center`,
+            backgroundSize: 'cover',
+            borderRadius: '100%',
+        }
+    }
     return(
         <div className="userProfile">
-            
+            <div className="profileHead">
+                <h1 className="username">{profile.username}</h1>
+                {profile.description?<h6>{profile.description}</h6>:null}
+                <div className="profileImage" style={styles.profileImage}></div>
+            </div>
         </div>
         )
     }
