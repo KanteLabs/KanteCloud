@@ -13,7 +13,7 @@ class App extends Component {
     super(props);
     this.state ={
       audioPlaying: false,
-      audio: null
+      currAudio: null
     }
     this.playAudio = this.playAudio.bind(this)
   }
@@ -23,9 +23,9 @@ class App extends Component {
     let audio = document.querySelector('audio.react-audio-player');
     audio.paused ? audio.play() : audio.pause();
     this.setState({
-      audio: track
+      currAudio: track,
+      audioPlaying: true
     })
-    // finalAudioCallBack={this.playAudio}
   }
 
   render() {
@@ -38,7 +38,7 @@ class App extends Component {
           <Route exact path='/:username/:userid/:songid' component={SongProfile}/> 
           <Route component={NoMatch} />
         </Switch>
-        <TrackPlayer data={this.state.audio}/>
+         <TrackPlayer data={this.state.currAudio} playState={this.state.audioPlaying}/> 
       </div>
     </Router>
     );
