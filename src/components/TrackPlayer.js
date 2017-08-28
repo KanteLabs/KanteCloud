@@ -5,15 +5,14 @@ class TrackPlayer extends Component{
     constructor(props){
         super(props);
         this.state= {
-            autoPlay: false,
-            isPlaying: false
+            autoPlay: false
         }
     }
 
     componentDidUpdate(){
         if(!this.state.autoPlay){
             this.setState({
-                autoPlay: true
+                autoPlay: true,
             })
         }
     }

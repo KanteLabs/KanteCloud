@@ -19,13 +19,17 @@ class App extends Component {
   }
 
   playAudio=(track)=>{
-    console.log(`new ${track}`)
     let audio = document.querySelector('audio.react-audio-player');
-    audio.paused ? audio.play() : audio.pause();
     this.setState({
-      currAudio: track,
-      audioPlaying: true
+      currAudio: track
     })
+    if(audio.paused){
+      audio.play();
+      this.setState({audioPlaying: true})
+    }else{
+      audio.pause();
+      this.setState({audioPlaying: false})
+    }
   }
 
   render() {

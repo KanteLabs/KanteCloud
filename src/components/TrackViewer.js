@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import TrackPlayer from './TrackPlayer';
 import UserProfile from './UserProfile';
 import SC from 'soundcloud';
 import {getImageUrl, IMAGE_SIZES, client_id, client_secret} from './config';
