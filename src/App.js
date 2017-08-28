@@ -13,12 +13,12 @@ class App extends Component {
     super(props);
     this.state ={
       audioPlaying: false,
-      audio: 'https://api.soundcloud.com/tracks/266129708/stream?secret_token%5BuseHTML5Audio%5D=true&format=json&client_id=0PKz7xjH5uemKDK8GdHQyO0mU9kZ0fJ2'
+      audio: null
     }
     this.playAudio = this.playAudio.bind(this)
   }
 
-  playAudio(track){
+  playAudio=(track)=>{
     console.log(`new ${track}`)
     let audio = document.querySelector('audio.react-audio-player');
     audio.paused ? audio.play() : audio.pause();
@@ -33,7 +33,7 @@ class App extends Component {
     <Router>
       <div className="App">
         <Switch>
-          <Route exact path='/' component={AppContainer} />
+          <Route exact path="/" render={() => <AppContainer playAudio={this.playAudio} playStatus={this.state.audioPlaying}/>} />
           <Route exact path='/:username/:userid' component={UserProfile}/>
           <Route exact path='/:username/:userid/:songid' component={SongProfile}/> 
           <Route component={NoMatch} />

@@ -10,22 +10,24 @@ class TrackViewer extends Component {
     constructor(props){
         super(props);
         this.state = {
-            audio: 'https://api.soundcloud.com/tracks/266129708/stream?secret_token%5BuseHTML5Audio%5D=true&format=json&client_id=0PKz7xjH5uemKDK8GdHQyO0mU9kZ0fJ2'
+            audio: ''
         }
     }
 
     playCallBack(event){
-        let track = (event.target.title)
         // let audio = document.querySelector('audio.react-audio-player');
-        let divItem = document.querySelector(`div.overlay[title='${track}']`)
-        console.log(track, divItem)
         // audio.paused ? audio.play() : audio.pause();
+        let divItem = document.querySelector(`div.overlay[title='${event.target.title}']`)
+        console.log(event.target.title, divItem)
         divItem.innerHTML === ' ▶ ' ? divItem.innerHTML = ' || ' : divItem.innerHTML = ' ▶ ';
         this.setState({
-            audio: `https://api.soundcloud.com/tracks/${track}/stream?secret_token%5BuseHTML5Audio%5D=true&format=json&client_id=${client_id}`
-        })
-        this.props.passAudioCallBack(this.state.audio)
+            audio: `https://api.soundcloud.com/tracks/${event.target.title}/stream?secret_token%5BuseHTML5Audio%5D=true&format=json&client_id=${client_id}`
+        }, this.updateAudioPlaying())
+    }
 
+    updateAudioPlaying(){
+        console.log(this.state.audio)
+        this.props.passAudioCallBack(this.state.audio)
     }
 
     render(){

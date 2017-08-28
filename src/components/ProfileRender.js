@@ -23,13 +23,22 @@ class ProfileRender extends Component {
         ]
         let urlsState = [
             {
-                state: {}
+                user_tracks: {},
+                playlist: {},
+                followings: {},
+                followers: {},
+                favorites: {},
+                social_media: {},
             }
         ]
         Promise.all(userUrls.map(url =>
             fetch(url).then(resp => resp.json())
         )).then(res => {
             console.log(res)
+            for(let i of urlsState){
+                urlsState[i] = res;
+            }
+            console.log(urlsState)
         })
 
         // fetch(`${userUrls}`,{method: 'GET'})

@@ -80,9 +80,12 @@ class AppContainer extends Component {
 
     handleAudioPlay=(audio)=>{
       console.log(`Receiving ${audio} and sending to App.js`)
+      this.setState({
+        currAudio: audio
+      })
       console.log(this)
       console.log(this.props)
-      this.props.finalAudioCallBack(audio)
+      this.props.playAudio(audio)
     }
 
   render() {
