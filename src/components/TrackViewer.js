@@ -10,18 +10,18 @@ class TrackViewer extends Component {
     constructor(props){
         super(props);
         this.state = {
-            audio: ''
+            currAudio: ''
         }
     }
 
     playCallBack(event){
         let divItem = document.querySelector(`div.overlay[title='${event.target.title}']`)
-        console.log(event.target.title, divItem)
         divItem.innerHTML === ' ▶ ' ? divItem.innerHTML = ' || ' : divItem.innerHTML = ' ▶ ';
+        let targetTrack = `https://api.soundcloud.com/tracks/${event.target.title}/stream?secret_token%5BuseHTML5Audio%5D=true&format=json&client_id=${client_id}`;
         this.setState({
-            audio: `https://api.soundcloud.com/tracks/${event.target.title}/stream?secret_token%5BuseHTML5Audio%5D=true&format=json&client_id=${client_id}`
+            currAudio: `https://api.soundcloud.com/tracks/${event.target.title}/stream?secret_token%5BuseHTML5Audio%5D=true&format=json&client_id=${client_id}`
         })
-        this.props.passAudioCallBack(this.state.audio)
+        this.props.passAudioCallBack(targetTrack)
     }
 
     render(){
