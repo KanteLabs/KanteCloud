@@ -64,7 +64,7 @@ class NavBar extends Component{
             this.loginSuccess.bind(me)
             document.querySelector('.loginItem').innerText = me.username;
             SC.get('/me/favorites')
-            fetch(`https://api.soundcloud.com/users/${me.id}/favorites/?&client_id=${client_id}`, { method:"GET" })
+            fetch(`https://api.soundcloud.com/users/${me.id}/favorites/?&client_id=${client_id}&limit=100`, { method:"GET" })
             .then(response => response.json())
             .then(trackInfo => {   
                 this.setState({ trackInfo: trackInfo})
