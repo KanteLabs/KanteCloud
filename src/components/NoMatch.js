@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 
 class NoMatch extends Component {
-   
-
     componentDidMount(){
         console.log('404')
     }
@@ -11,6 +10,7 @@ class NoMatch extends Component {
     return(
         <div>
             <h1>404 Page Not found :( </h1>
+            <Redirect to='' />
         </div>
         )
     }
