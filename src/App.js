@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AppContainer from './AppContainer';
+// import NavBar from './components/NavBar';
 import UserProfile from './components/UserProfile';
 import SongProfile from './components/SongProfile';
 import TrackPlayer from './components/TrackPlayer';
@@ -36,6 +37,7 @@ class App extends Component {
     return (
     <Router>
       <div className="App">
+         {/* <NavBar />  */}
         <Switch>
           <Route exact path="/" render={() => <AppContainer playAudio={this.playAudio} playStatus={this.state.audioPlaying}/>} />
           <Route exact path='/:username/:userid' component={UserProfile}/>

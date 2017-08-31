@@ -11,7 +11,7 @@ class UserProfile extends Component {
     }
 
     componentDidMount(){
-        console.log(`Fetching Profile of User ${this.props.match.params.userid}`)
+        console.log(`Fetching Profile of User ${this.props.match.params.username}`)
         let user_id = this.props.match.params.userid;
         fetch(`http://api.soundcloud.com/users/${user_id}?client_id=${client_id}`,{method: 'GET'})
         .then( response => response.json())
@@ -27,7 +27,7 @@ class UserProfile extends Component {
     render(){
     return(
         <div className="userProfile">
-            {this.state.userData !== undefined ? <ProfileRender data={this.state.userData}/> : <h1> Fetching Profile of {this.props.match.params.userid} </h1>}
+            {this.state.userData !== undefined ? <ProfileRender data={this.state.userData}/> : <h1> Fetching Profile of {this.props.match.params.username} </h1>}
         </div>
         )
     }

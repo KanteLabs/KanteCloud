@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Config, getImageUrl, IMAGE_SIZES, client_id} from './config';
+import {getImageUrl, IMAGE_SIZES, client_id} from './config';
 import {Link} from 'react-router-dom';
 class ProfileRender extends Component {
     constructor(props){
@@ -12,46 +12,10 @@ class ProfileRender extends Component {
 
     componentDidMount(){
         console.log(`Profile of ${this.props.data.username}`)
-        let userUrls = [
-            `https://api.soundcloud.com/users/${this.props.data.id}/tracks?client_id=${client_id}`,
-            `https://api.soundcloud.com/users/${this.props.data.id}/playlists?client_id=${client_id}`,
-            `https://api.soundcloud.com/users/${this.props.data.id}/followings?client_id=${client_id}`,
-            `https://api.soundcloud.com/users/${this.props.data.id}/followers?client_id=${client_id}`,
-            `https://api.soundcloud.com/users/${this.props.data.id}/favorites?client_id=${client_id}`,
-            `https://api.soundcloud.com/users/${this.props.data.id}/web-profiles?client_id=${client_id}`,
-        
-        ]
-        let urlsState = [
-            {
-                user_tracks: {},
-                playlist: {},
-                followings: {},
-                followers: {},
-                favorites: {},
-                social_media: {},
-            }
-        ]
-        Promise.all(userUrls.map(url =>
-            fetch(url).then(resp => resp.json())
-        )).then(res => {
-            console.log(res)
-            for(let i of urlsState){
-                urlsState[i] = res;
-            }
-            console.log(urlsState)
-        })
-
-        // fetch(`${userUrls}`,{method: 'GET'})
-        // .then(res=>res.json())
-        // .then((res)=>{
-        //     console.log(res)
-        //     this.setState({
-        //         userTracks: res
-        //     })
-        // }).catch(err=>console.log(err))
-        // this.setState({
-        //     userData: this.props.data
-        // })
+        this.setState({
+            userData: this.props.data,
+            userTracks: this.props.userTracks
+        })  
     }
 
     render(){
@@ -167,12 +131,32 @@ GET, PUT, DELETE	/users/{id}/favorites/{id}	track favorited by the user
 GET, PUT, DELETE	/users/{id}/web-profiles	list of web profiles
 
 let userUrls = [
-    `https://api.soundcloud.com/users/${this.props.data.id}/tracks?client_id=${client_id}`,
-    `https://api.soundcloud.com/users/${this.props.data.id}/playlists?client_id=${client_id}`,
-    `https://api.soundcloud.com/users/${this.props.data.id}/followings?client_id=${client_id}`,
-    `https://api.soundcloud.com/users/${this.props.data.id}/followers?client_id=${client_id}`,
-    `https://api.soundcloud.com/users/${this.props.data.id}/comments?client_id=${client_id}`,
-    `https://api.soundcloud.com/users/${this.props.data.id}/favorites?client_id=${client_id}`,
-    `https://api.soundcloud.com/users/${this.props.data.id}/web-profiles?client_id=${client_id}`,
-]
+            `https://api.soundcloud.com/users/${this.props.data.id}/tracks?client_id=${client_id}`,
+            `https://api.soundcloud.com/users/${this.props.data.id}/playlists?client_id=${client_id}`,
+            `https://api.soundcloud.com/users/${this.props.data.id}/followings?client_id=${client_id}`,
+            `https://api.soundcloud.com/users/${this.props.data.id}/followers?client_id=${client_id}`,
+            `https://api.soundcloud.com/users/${this.props.data.id}/favorites?client_id=${client_id}`,
+            `https://api.soundcloud.com/users/${this.props.data.id}/web-profiles?client_id=${client_id}`,
+        
+        ]
+        let urlsState = [
+            {
+                user_tracks: {},
+                playlist: {},
+                followings: {},
+                followers: {},
+                favorites: {},
+                social_media: {},
+            }
+        ]
+        Promise.all(userUrls.map(url =>
+            fetch(url).then(resp => resp.json())
+        )).then(res => {
+            console.log(res)
+            for(let i of urlsState){
+                urlsState[i] = res;
+            }
+            console.log(urlsState)
+        })
 */
+
