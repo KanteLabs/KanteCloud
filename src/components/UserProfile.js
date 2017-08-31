@@ -13,7 +13,7 @@ class UserProfile extends Component {
     componentDidMount(){
         console.log(`Fetching Profile of User ${this.props.match.params.username}`)
         let user_id = this.props.match.params.userid;
-        fetch(`http://api.soundcloud.com/users/${user_id}?client_id=${client_id}`,{method: 'GET'})
+        fetch(`https://api.soundcloud.com/users/${user_id}?client_id=${client_id}`,{method: 'GET'})
         .then( response => response.json())
         .then(profileInfo => {
             console.log(profileInfo)
