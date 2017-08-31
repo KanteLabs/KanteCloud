@@ -63,8 +63,7 @@ class AppContainer extends Component {
     })
   }
 
-  handleSearchSubmit(event){
-    event.preventDefault();
+  handleSearchSubmit(){
     // Using arrow functions for readability
     if(this.state.value !== ""){        	
     fetch(Config.search + this.state.value, { method:"GET" })
@@ -74,7 +73,7 @@ class AppContainer extends Component {
             this.setState({trackInfo: trackInfo})
       })
       .catch(error => console.log(error))
-    }event.preventDefault();
+    }
     };
 
     handleAudioPlay=(audio)=>{
