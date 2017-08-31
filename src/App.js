@@ -39,7 +39,7 @@ class App extends Component {
       <div className="App">
          {/* <NavBar />  */}
         <Switch>
-          <Route exact path="KanteCloud/" render={() => <AppContainer playAudio={this.playAudio} playStatus={this.state.audioPlaying}/>} />
+          <Route exact path="/" render={() => <AppContainer playAudio={this.playAudio} playStatus={this.state.audioPlaying}/>} />
           <Route exact path='/:username/:userid' component={UserProfile}/>
           <Route exact path='/:username/:userid/:songid' component={SongProfile}/> 
           <Route component={NoMatch} />
