@@ -37,7 +37,25 @@ button {
     background-position: center !important;
     background-repeat: no-repeat !important;
 }
+.card {
+    border: 1px solid #bbb;
+    margin-top: 2em;
+    margin-bottom: 5em;
+}
 
+.card-body {
+    background: black;
+    color: white;
+}
+
+.card-title a {
+    text-decoration: none;
+    color: white;
+}
+
+.card-text p, .card-title a, img.card-img-top {
+    opacity: 0.9;
+}
 /*Base CSS Props*/
 .textOverflow, .trackText .userName, .trackText .songTitle {
   display: block;
