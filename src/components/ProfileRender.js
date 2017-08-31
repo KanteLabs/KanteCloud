@@ -26,7 +26,7 @@ class ProfileRender extends Component {
             borderRadius: '100%',
         },
         cardBodyOverlay: {
-            backgroundImage: `url("https://i1.sndcdn.com/avatars-000035176561-rg0orz-t500x500.jpg")`,
+            backgroundImage: `url(${getImageUrl(profile.avatar_url, IMAGE_SIZES.XLARGE)})`,
         }
     }
     return(
