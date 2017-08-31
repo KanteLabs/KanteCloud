@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getImageUrl, IMAGE_SIZES, client_id} from './config';
+import {getImageUrl, IMAGE_SIZES} from './config';
 import {Link} from 'react-router-dom';
 class ProfileRender extends Component {
     constructor(props){
