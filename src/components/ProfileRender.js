@@ -47,12 +47,10 @@ class ProfileRender extends Component {
                 </div> 
             </div>
              <ul className="list-group list-group-flush">
-                <li className="list-group-item">Following: <span>{profile.followings_count}</span></li>
-                <li className="list-group-item">Followers: <span>{profile.followers_count}</span></li>
+                <li className="list-group-item">Followers: <span>{profile.followers_count}</span> and Following: <span>{profile.followings_count}</span></li>
                 <li className="list-group-item">Tracks: <span>{profile.track_count}</span></li>
                 <li className="list-group-item">Playlists: <span>{profile.playlist_count}</span> </li>
                 <li className="list-group-item">Favorites: <span>{profile.public_favorites_count}</span> </li>
-                <li className="list-group-item">Reposts: <span>{profile.reposts_count}</span> </li>
                 <li className="list-group-item">Reposts: <span>{profile.reposts_count}</span> </li>
                 {profile.website ? <li className="list-group-item"><a href={profile.website}>{profile.website}</a></li> : null}
             </ul>
