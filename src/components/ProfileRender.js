@@ -23,48 +23,39 @@ class ProfileRender extends Component {
     let styles = {
         profileImage: {
             width: '150px',height: '150px',
-            background: `url(${getImageUrl(profile.avatar_url, IMAGE_SIZES.XLARGE)}) no-repeat center center`,
             borderRadius: '100%',
+        },
+        cardBodyOverlay: {
+            backgroundImage: `url("https://i1.sndcdn.com/avatars-000035176561-rg0orz-t500x500.jpg")`, 
         }
     }
     return(
-        <div className="container">
-            <div className="userProfile">
-                <div className="profileHead">
-                    <h1 className="username">
-                        <Link to={`/${profile.permalink}/${profile.id}`}>{profile.username}</Link> 
-                        <span className="onlineStatus">{profile.online ? '🔵' : '🔴'}</span> 
-                    </h1>
-                    {profile.full_name !== "" ? <h6>{profile.full_name}</h6> : null}
-                    {profile.city !== "" && profile.country !== "" ? <h6>{profile.city } - {profile.country}</h6> : null}
-                    <div className="profileImage" style={styles.profileImage}></div>
-                </div>
-                <div className="follows">
-                    <ul>
-                        <li><span>Follow or Following</span></li>
-                        <li>Following: <span>{profile.followings_count}</span></li>
-                        <li>Followers: <span>{profile.followers_count}</span></li>
-                    </ul>
-                </div>
-                <div className="activity">
-                    <ul>
-                        <li>Tracks: <span>{profile.track_count}</span></li>
-                        <li>Playlists: <span>{profile.playlist_count}</span> </li>
-                        <li>Favorites: <span>{profile.public_favorites_count}</span> </li>
-                        <li>Reposts: <span>{profile.reposts_count}</span> </li>
-                    </ul>
-                </div>
-                <div className="profileBody">
-                    {profile.description ? <h4>{profile.description}</h4> : null}
-                </div>
-                <div className="profileEnd">
-                    <ul>
-                        {profile.myspace_name ? <li><p>{profile.myspace_name}</p></li> : null}
-                        {profile.website ? <li><a href={profile.website}>{profile.website}</a></li> : null}
-                    </ul>
-                </div>
+        <div className="card">
+            {/* <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a> */}
+            <div className="card-body" style={styles.cardBodyOverlay}>
+                <img className="card-img-top" src={getImageUrl(profile.avatar_url, IMAGE_SIZES.XLARGE)} style={styles.profileImage} alt={profile.username}/>
+                <h1 className="card-title">
+                    <Link to={`/${profile.permalink}/${profile.id}`}>{profile.username}</Link> 
+                    <span className="onlineStatus">{profile.online ? '🔵' : '🔴'}</span> 
+                </h1>
+                {profile.full_name !== "" ? <h6 className="card-subtitle mb-2 text-muted">{profile.full_name}</h6> : null}
+                {profile.city !== "" && profile.country !== "" ? <h6 className="card-subtitle mb-2 text-muted">{profile.city } - {profile.country}</h6> : null}
+                <div className="card-text">
+                    {profile.description ? <p>{profile.description}</p> : null}
+                </div> 
             </div>
-            {this.renderUserTracks}
+             <ul className="list-group list-group-flush">
+                <li className="list-group-item">Following: <span>{profile.followings_count}</span></li>
+                <li className="list-group-item">Followers: <span>{profile.followers_count}</span></li>
+                <li className="list-group-item">Tracks: <span>{profile.track_count}</span></li>
+                <li className="list-group-item">Playlists: <span>{profile.playlist_count}</span> </li>
+                <li className="list-group-item">Favorites: <span>{profile.public_favorites_count}</span> </li>
+                <li className="list-group-item">Reposts: <span>{profile.reposts_count}</span> </li>
+                <li className="list-group-item">Reposts: <span>{profile.reposts_count}</span> </li>
+                {profile.website ? <li className="list-group-item"><a href={profile.website}>{profile.website}</a></li> : null}
+            </ul>
+            {/* {this.renderUserTracks} */}
         </div>
         )
     }

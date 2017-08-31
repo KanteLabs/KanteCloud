@@ -26,7 +26,7 @@ class UserProfile extends Component {
 
     render(){
     return(
-        <div className="userProfile">
+        <div className="container">
             {this.state.userData !== undefined ? <ProfileRender data={this.state.userData}/> : <h1> Fetching Profile of {this.props.match.params.username} </h1>}
         </div>
         )

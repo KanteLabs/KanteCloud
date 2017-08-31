@@ -13,10 +13,21 @@ ul li a {
   text-decoration: none; }
 
 button {
-  padding: 1em; }
+  padding: 1em; 
+}
+.card{
+  padding: 1em;
+}
 
-.profileImage{
+.card-img-top{
   background-size: contain !important;
+  border: 5px solid white;
+  box-sizing: content-box;
+}
+.card-body{
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
 }
 
 /*Base CSS Props*/
