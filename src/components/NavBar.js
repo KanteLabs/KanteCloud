@@ -3,7 +3,7 @@ import SC from 'soundcloud';
 import {Config, genreName, client_id } from './config';
 import '../search.css';
 
-class Search extends Component{
+class NavBar extends Component{
 
     constructor(props){
         super(props);
@@ -64,7 +64,7 @@ class Search extends Component{
             this.loginSuccess.bind(me)
             document.querySelector('.loginItem').innerText = me.username;
             SC.get('/me/favorites')
-            fetch(`https://api.soundcloud.com/users/${me.id}/favorites/?&client_id=${client_id}`, { method:"GET" })
+            fetch(`https://api.soundcloud.com/users/${me.id}/favorites/?&client_id=${client_id}&limit=100`, { method:"GET" })
             .then(response => response.json())
             .then(trackInfo => {   
                 this.setState({ trackInfo: trackInfo})
@@ -99,4 +99,4 @@ class Search extends Component{
     }
 };
 
-export default Search;
+export default NavBar;
