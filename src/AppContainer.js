@@ -63,7 +63,7 @@ class AppContainer extends Component {
     })
   }
 
-  handleSearchSubmit(){
+  handleSearchSubmit(event){
     event.preventDefault();
     // Using arrow functions for readability
     if(this.state.value !== ""){        	
