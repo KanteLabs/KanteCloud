@@ -26,14 +26,15 @@ class ProfileRender extends Component {
             borderRadius: '100%',
         },
         cardBodyOverlay: {
-            backgroundImage: `url("https://i1.sndcdn.com/avatars-000035176561-rg0orz-t500x500.jpg")`, 
+            backgroundImage: `url("https://i1.sndcdn.com/avatars-000035176561-rg0orz-t500x500.jpg")`,
         }
     }
     return(
         <div className="card">
             {/* <a href="#" class="card-link">Card link</a>
             <a href="#" class="card-link">Another link</a> */}
-            <div className="card-body" style={styles.cardBodyOverlay}>
+            <div className="card-body">
+                <div className="cardBodyImage" style={styles.cardBodyOverlay}></div>
                 <img className="card-img-top" src={getImageUrl(profile.avatar_url, IMAGE_SIZES.XLARGE)} style={styles.profileImage} alt={profile.username}/>
                 <h1 className="card-title">
                     <Link to={`/${profile.permalink}/${profile.id}`}>{profile.username}</Link> 
