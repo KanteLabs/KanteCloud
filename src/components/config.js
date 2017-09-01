@@ -6,8 +6,9 @@ export const Config = {
   hi: 'hello',
   search: `https://api.soundcloud.com/tracks?&client_id=${client_id}&limit=100&offset=0&q=`,
   newTracks: `https://api.soundcloud.com/tracks?format=json&client_id=${client_id}`,
-  genreTag: `https://api.soundcloud.com/tracks?&client_id=${client_id}&limit=50&offset=0&tags=`
-  
+  genreTag: `https://api.soundcloud.com/tracks?&client_id=${client_id}&limit=50&offset=0&tags=`,
+  singleTrack: `https://api.soundcloud.com/tracks`,
+  userTracks: `https://api.soundcloud.com/users/`
 }
 
 export const genreName = [
