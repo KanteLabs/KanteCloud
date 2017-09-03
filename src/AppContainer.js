@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TrackViewer from './components/TrackViewer';
 import SC from 'soundcloud';
-import {Config, client_id} from './components/config';
+import {client_id} from './components/config';
 import './search.css';
 import './App.css';
 

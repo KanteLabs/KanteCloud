@@ -5,7 +5,7 @@ import UserProfile from './components/UserProfile';
 import SongProfile from './components/SongProfile';
 import TrackPlayer from './components/TrackPlayer';
 import NoMatch from './components/NoMatch';
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {Config} from './components/config';
 import './search.css';
 import './App.css';
@@ -91,6 +91,7 @@ class App extends Component {
           </div>  
         <Switch>
           <Route exact path="/" render={() => <AppContainer trackInfo={this.state.trackInfo} playAudio={this.playAudio} playStatus={this.state.audioPlaying}/>} />
+          <Route exact path="/KanteCloud" render={() => <AppContainer trackInfo={this.state.trackInfo} playAudio={this.playAudio} playStatus={this.state.audioPlaying}/>} />
           <Route exact path='/:username/:userid' component={UserProfile}/>
           <Route exact path='/:username/:userid/:songid' component={SongProfile}/> 
           <Route component={NoMatch} />
