@@ -15,8 +15,11 @@ ul li a {
 button {
   padding: 1em; 
 }
-.card{
-  padding: 1em;
+
+button.nav-item.nav-link {
+    outline: 0;
+    border: 0;
+    background: transparent;
 }
 
 .card-img-top{
@@ -39,8 +42,9 @@ button {
 }
 .card {
     border: 1px solid #bbb;
-    margin-top: 2em;
+    margin-top: 8em;
     margin-bottom: 5em;
+    padding: 1em;
 }
 
 .card-body {
