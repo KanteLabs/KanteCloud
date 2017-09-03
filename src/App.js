@@ -5,7 +5,7 @@ import UserProfile from './components/UserProfile';
 import SongProfile from './components/SongProfile';
 import TrackPlayer from './components/TrackPlayer';
 import NoMatch from './components/NoMatch';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import {Config} from './components/config';
 import './search.css';
 import './App.css';

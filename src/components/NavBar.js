@@ -29,7 +29,7 @@ class NavBar extends Component{
     //This will search for the genre tag by using the genreTags provided in the config file
     handleGenreCall(event){
         let name = (event.target.name);
-        let menuItem = document.querySelector(`a[name="${name}"]`);
+        let menuItem = document.querySelector(`button[name="${name}"]`);
         if(menuItem.className === 'nav-item nav-link'){
             document.querySelectorAll('a.nav-item.nav-link').forEach((item)=>{
                 item.className = 'nav-item nav-link';
@@ -84,14 +84,14 @@ class NavBar extends Component{
             </button>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
-                <a className="nav-item nav-link" href="#" name={genreName[0]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[0]}</a>
-                <a className="nav-item nav-link" href="#" name={genreName[1]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[1]}</a>
-                <a className="nav-item nav-link" href="#" name={genreName[2]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[2]}</a>
-                <a className="nav-item nav-link" href="#" name={genreName[3]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[3]}</a>
-                <a className="nav-item nav-link" href="#" name={genreName[4]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[4]}</a>
-                <a className="nav-item nav-link" href="#" name={genreName[5]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[5]}</a>
-                <a className="nav-item nav-link navItem" href="#" onClick={() =>this.handleLatestTracksClick()}>Latest</a>
-                <a className="nav-item nav-link loginItem" href="#" onClick={() =>this.handleLoginClick()}>Login</a>
+                <button className="nav-item nav-link" name={genreName[0]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[0]}</button>
+                <button className="nav-item nav-link" name={genreName[1]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[1]}</button>
+                <button className="nav-item nav-link" name={genreName[2]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[2]}</button>
+                <button className="nav-item nav-link" name={genreName[3]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[3]}</button>
+                <button className="nav-item nav-link" name={genreName[4]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[4]}</button>
+                <button className="nav-item nav-link" name={genreName[5]} onClick={(event) =>this.handleGenreCall(event)}>{genreName[5]}</button>
+                <button className="nav-item nav-link navItem" onClick={() =>this.handleLatestTracksClick()}>Latest</button>
+                <button className="nav-item nav-link loginItem" onClick={() =>this.handleLoginClick()}>Login</button>
                 </div>
             </div>
             </nav>

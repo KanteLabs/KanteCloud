@@ -15,6 +15,12 @@ ul li a {
 button {
   padding: 1em; 
 }
+
+button.nav-item.nav-link {
+    outline: 0;
+    border: 0;
+    background: transparent;
+}
 .card{
   padding: 1em;
 }
