@@ -20,6 +20,7 @@ button.nav-item.nav-link {
     outline: 0;
     border: 0;
     background: transparent;
+    cursor: pointer;
 }
 
 .card-img-top{
